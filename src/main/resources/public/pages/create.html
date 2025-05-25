@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>NFT Collection</title>
+  <link href="/css/style.css" type="text/css" rel="stylesheet">
+
+  <script src="/js/initialize_header.js"></script>
+  <script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
+  <script src="https://unpkg.com/@tonconnect/sdk@latest/dist/tonconnect-sdk.min.js"></script>
+</head>
+<body>
+
+  <div id="site-header"></div>
+
+<div id="content">
+  <div id="background-create-wrapper">
+  <div class="title">
+    <h1>Let’s create an NFT collection</h1>
+    <p class="subtitle">Create an NFT drop, you must first deploy a TON contract on the blockchain.</p>
+  </div>
+
+  <div class="form-group">
+    <label>Collection Logo</label>
+    <div class="upload-box">
+      <img id="upload-box" src="/img/upload-box.png" alt="upload-box">
+      <div>Support PNG, JPG, GIF, AVIF<br>max size 99 MB</div>
+      <button class="btn-upload">upload file</button>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label>Collection name</label>
+    <input type="text" placeholder="Name Your Collection">
+  </div>
+
+  <div class="form-group">
+    <label>Network</label>
+    <div class="network-box">
+      <img src="/img/the_open_network_logo%201.png" alt="TON logo">
+      Ton network — Chain ID: 9999
+    </div>
+  </div>
+
+  <button class="btn-submit">DEPLOY!</button>
+</div>
+</div>
+</body>
+</html>

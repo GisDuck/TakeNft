@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <!-- 1. Определяем аппендер с ротацией по дате -->
+    <appender name="ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- Основной файл -->
+        <file>logs/take-nft.log</file>
+
+        <!-- Ротация: каждый день создаётся новый файл -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- Архивные файлы: take-nft.2025-05-13.log, take-nft.2025-05-14.log и т.д. -->
+            <fileNamePattern>logs/take-nft.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!-- Храним архивы за последнюю неделю -->
+            <maxHistory>7</maxHistory>
+            <!-- Удаляем старые файлы, если суммарный размер архивов > 1GB -->
+            <totalSizeCap>1GB</totalSizeCap>
+        </rollingPolicy>
+
+        <!-- Формат записи -->
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 2. Консольный аппендер -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 3. Логгер уровня по умолчанию -->
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+        <appender-ref ref="ROLLING"/>
+    </root>
+
+    <!-- 4. Отдельный пакет с детальным логированием -->
+    <logger name="take_nft" level="DEBUG" additivity="false">
+        <appender-ref ref="ROLLING"/>
+    </logger>
+
+</configuration>

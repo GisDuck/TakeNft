@@ -1,0 +1,88 @@
+#friends-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+#friends-container p {
+  color: #373737;
+  margin: 0px;
+}
+
+
+.friend-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  border-radius: 20px;
+  background: #F2F2F2;
+  transition: background 0.3s, color 0.3s;
+  cursor: pointer;
+}
+.friend-card:hover {
+  background: #000;
+  color: #fff;
+}
+
+
+.invite {
+  background: #79C3FF; 
+}
+.invite:hover {
+  background: #000;
+}
+
+
+.friend-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.ammount-nft {
+  margin-left: 50px;
+}
+
+.friend-info img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.friend-info .name {
+  font-size: 16px;
+  font-weight: 700;
+}
+.friend-info .count {
+  font-size: 14px;
+  color: inherit;
+}
+
+
+.friend-actions button {
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 700;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s, color 0.3s;
+}
+.friend-card button {
+  background: #000;
+  color: #fff;
+}
+.friend-card button:hover {
+  background: #79C3FF;
+  color: #000;
+}
+.invite button {
+  background: #fff;
+  color: #000;
+  margin-left: 8px;
+}
+.invite button:hover {
+  background: #79C3FF;
+  color: #fff;
+}

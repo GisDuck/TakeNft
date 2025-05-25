@@ -1,0 +1,150 @@
+
+#nft-detail {
+background: #D9D9D9;
+border-radius: 30px;
+margin: 0px clamp(20px, 30%, 100px) 0px;
+padding: 40px;
+}
+
+.detail-container {
+display: flex;
+gap: 80px;
+flex-wrap: wrap;
+}
+
+
+.detail-image {
+flex: 1 1 400px;
+max-width: 800px;
+margin: auto;
+}
+
+@media (max-width: 1150px) {
+  .detail-image {
+    max-width: 500px;
+    }
+}
+
+.detail-image img {
+width: 100%;
+border-radius: 12px;
+aspect-ratio: 1/1;
+object-fit:cover;
+}
+
+
+.detail-info {
+  margin-top: 22px;
+flex: 1 1 400px;
+display: flex;
+flex-direction: column;
+gap: 24px;
+}
+.detail-info h1 {
+font-size: 28px;
+font-weight: 900;
+color: #000;
+}
+
+
+.btn-see-more {
+align-self: start;
+font-size: 16px;
+font-weight: 600;
+color: #fdfdfd;
+background:#000;
+border: #000;
+border-radius: 20px;
+padding: 8px 16px;
+cursor: pointer;
+transition: background 0.3s, color 0.3s;
+}
+
+.btn-see-more:hover {
+background: #79C3FF;
+color: #000000;
+border: #79C3FF;
+}
+
+#info-wrapper {
+  background: #f8f8f8;
+  border-radius: 30px;
+  padding: 30px;
+  margin-top: 10px;
+}
+
+
+
+.info-grid {
+display: grid;
+grid-template-columns: repeat(3, 1fr);
+gap: 16px;
+padding-top: 16px;
+
+}
+.info-row {
+display: flex;
+flex-direction: column;
+gap: 4px;
+white-space: nowrap;
+}
+.info-row .label {
+font-size: 14px;
+font-weight: 700;
+color: #448bc5;
+}
+.info-row .value {
+font-size: 16px;
+font-weight: 500;
+color: #000;
+}
+.info-row a.value {
+text-decoration: none;
+color: #000;
+}
+.info-row a.value:hover {
+text-decoration: underline;
+}
+
+
+.description {
+border-top: 2px solid #000000;
+padding-top: 16px;
+margin-top: 20px;
+}
+
+.description h3 {
+font-size: 18px;
+font-weight: 700;
+margin-bottom: 8px;
+}
+.description p {
+font-size: 14px;
+line-height: 1.6;
+color: #555;
+}
+
+
+.holder {
+    display: inline-flex;
+    margin-top: 10px;
+    align-items: center;
+    gap: 8px;
+    width: fit-content;
+    height: 60px;
+    background: #000;
+    border: 0px;
+    border-radius: 20px;
+    padding: 8px 16px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background 0.3s;
+
+    font-weight: 700;
+    color: #fcfcfc;
+  }
+  .holder:hover {
+    background: #79C3FF;
+    color: #000;
+  }
+

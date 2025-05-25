@@ -1,1 +1,6 @@
+plugins {
+    // позволяет Gradle автоматически скачивать JDK из репозиториев Foojay/Temurin
+    id("org.gradle.toolchains.foojay-resolver-convention") version "0.9.0"
+}
+
 rootProject.name = 'takeNft'

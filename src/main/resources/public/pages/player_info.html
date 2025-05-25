@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Профиль игрока</title>
+  <link href="/css/style.css" rel="stylesheet" type="text/css" />
+
+  <script src="/js/initialize_header.js"></script>
+  <script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
+  <script src="https://unpkg.com/@tonconnect/sdk@latest/dist/tonconnect-sdk.min.js"></script>
+  <script type="module" src="/js/player_info.js"></script>
+</head>
+<body>
+
+  <div id="site-header"></div>
+
+  <div id="wrapper">
+    <div id="content">
+      <section id="player-profile">
+        <div class="profile-card">
+          <div class="profile-avatar">
+            <img id="player-avatar" class="little-circle" src="" alt="avatar">
+          </div>
+          <div class="profile-info">
+            <h2 id="username"></h2>
+            <div class="profile-actions">
+              <button id="duel-button">Propose a duel</button>
+              <button id="friend-button">Add to friends</button>
+            </div>
+          </div>
+        </div>
+
+        <div id="inventory-section">
+          <h3>Inventory</h3>
+          <div class="inventory-grid">
+
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,52 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: takeNft
+
+  liquibase:
+    enabled: true
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/takeNft
+    username: admin
+    password: admin
+    driver-class-name: org.postgresql.Driver
+
+    hikari:
+      maximum-pool-size: 30
+      minimum-idle: 5
+      connection-timeout: 30000
+      max-lifetime: 1800000
+
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: validate
+
+  cache:
+    type: redis
+
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+  rabbitmq:
+    host: localhost
+    port: 5672
+
+
+logging:
+  level:
+    root: INFO                  # Общий уровень логирования
+    take_nft: DEBUG             # Ваш пакет — логируем более подробно
+    org.springframework.web: WARN
+    org.hibernate.SQL: DEBUG   # Показывать SQL-запросы
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE # Показывать значения параметров SQL
+  file:
+    name: logs/take-nft.log     # Имя файла для логов
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %logger{36} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"

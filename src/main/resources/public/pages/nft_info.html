@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Детали NFT</title>
+  <link href="/css/style.css" rel="stylesheet" type="text/css" />
+
+  <script src="/js/initialize_header.js"></script>
+  <script type="module" src="/js/nft_info.js"></script>
+  <script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
+  <script src="https://unpkg.com/@tonconnect/sdk@latest/dist/tonconnect-sdk.min.js"></script>
+</head>
+<body>
+
+  <div id="site-header"></div>
+
+  <div id="wrapper">
+    <div id="content">
+      <section id="nft-detail">
+        <div class="detail-container">
+
+          <div class="detail-image">
+            <img id="nft-image" src="" alt="NFT image">
+          </div>
+
+          <div class="detail-info">
+            <h1 id="nft-title">Loading...</h1>
+
+            <button class="btn-see-more" id="btn-see-more">
+              See More from <span id="collection-name">—</span>
+            </button>
+
+             <div id="info-wrapper">
+            <div class="info-grid">
+              <div class="info-row">
+                <span class="label">Token ID</span>
+                <span id="token-id" class="value">—</span>
+              </div>
+              <div class="info-row">
+                <span class="label">Created</span>
+                <span id="created" class="value">—</span>
+              </div>
+              <div class="info-row">
+                <span class="label">Collection</span>
+                <a id="collection-link" class="value" href="#" target="_blank">—</a>
+              </div>
+            </div>
+
+            <div class="description">
+              <h3>Description</h3>
+              <p id="description">Loading...</p>
+            </div>
+          </div>
+
+            <div class="holder">
+              <span class="label">Holder:</span>
+              <img id="holder-avatar" class="little-circle">
+              <span id="holder">—</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <small>© 2023 — 2025 TN. All rights reserved.</small>
+  </footer>
+</body>
+</html>
