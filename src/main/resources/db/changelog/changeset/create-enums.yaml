@@ -1,0 +1,19 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-friend-duel-enums
+      author: GisDuck
+      changes:
+        - sql:
+            splitStatements: false
+            stripComments: false
+            sql: |
+              CREATE TYPE add_friends_setting AS ENUM (
+                'nobody',
+                'friends of friends',
+                'all'
+              );
+              CREATE TYPE send_duel_setting AS ENUM (
+                'nobody',
+                'friends',
+                'all'
+              );
