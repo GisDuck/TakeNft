@@ -1018,3 +1018,29 @@ input:focus {
   color: #000000 !important;
 }
 
+.best-nft-card,
+#hero {
+  transition: background 0.3s, color 0.3s;
+}
+
+.best-nft-card:hover {
+  background: rgb(20, 20, 20);
+  color: #f4f4f4;
+}
+.best-nft-card:hover p {
+  color: #f4f4f4;
+}
+
+#hero:hover {
+  background: rgb(20, 20, 20);
+}
+#hero:hover .hero-content h1,
+#hero:hover .hero-content p {
+  color: #f4f4f4;
+}
+
+[data-href] {
+  cursor: pointer;
+}
+
+

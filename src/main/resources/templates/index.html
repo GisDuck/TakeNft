@@ -8,6 +8,7 @@
   <script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
   <script src="https://unpkg.com/@tonconnect/sdk@latest/dist/tonconnect-sdk.min.js"></script>
   <script src="/js/initialize_header.js"></script>
+    <script src="/js/init_data_href.js"></script>
 </head>
 <body>
   <div id="site-header"></div>
@@ -15,8 +16,7 @@
 
 
   <div id="content">
-    <section id="hero">
-      <a th:href="'/collection/' + ${hero.id}">
+    <section id="hero" th:attr="data-href=@{'/collection/' + ${hero.id}}">
       <div class="hero-content">
         <h1 th:text="${hero.name}">#nft-collection-name</h1>
         <p th:text="'count: ' + ${hero.nftCount}">#nft count – 999</p>
@@ -26,19 +26,17 @@
              th:src="${hero.imgUrl}"
              alt="Rectangle">
       </div>
-      </a>
     </section>
 
     <h2 class="section-title">BEST NFT COLLECTIONS</h2>
 
     <div id="best-nft">
       <div class="best-nft-card"
-           th:each="col : ${bestCollections}">
-        <a th:href="'/collection/' + ${col.id}">
+           th:each="col : ${bestCollections}"
+           th:attr="data-href=@{'/collection/' + ${col.id}}">
         <img th:src="${col.imgUrl}"
              alt="Cover of [[${col.name}]]"/>
         <p th:text="${col.name}">#name</p>
-          </a>
       </div>
     </div>
 
@@ -53,8 +51,8 @@
           <span class="col-amount">amount nft</span>
         </div>
         <ul>
-          <li th:each="holder, stat : ${topHolders.subList(0, 5)}">
-            <a th:href="'/player/' + ${holder.username}">
+          <li th:each="holder, stat : ${topHolders.subList(0, 5)}"
+              th:attr="data-href=@{'/player/' + ${holder.username}}">
             <span class="left">
               <span class="rank" th:text="${stat.index+1}">1</span>
               <img class="little-circle"
@@ -63,7 +61,6 @@
               <span class="nick" th:text="${holder.username}">nickname</span>
             </span>
             <span class="right" th:text="${holder.nftCount}">0</span>
-            </a>
           </li>
         </ul>
       </div>
@@ -75,8 +72,8 @@
           <span class="col-amount">amount nft</span>
         </div>
         <ul>
-          <li th:each="holder, stat : ${topHolders.subList(5, 10)}">
-            <a th:href="'/player/' + ${holder.username}">
+          <li th:each="holder, stat : ${topHolders.subList(5, 10)}"
+              th:attr="data-href=@{'/player/' + ${holder.username}}">
             <span class="left">
               <span class="rank" th:text="${stat.index+6}">1</span>
               <img class="little-circle"
@@ -85,7 +82,6 @@
               <span class="nick" th:text="${holder.username}">nickname</span>
             </span>
             <span class="right" th:text="${holder.nftCount}">0</span>
-            </a>
           </li>
         </ul>
       </div>
