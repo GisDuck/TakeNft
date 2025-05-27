@@ -19,9 +19,9 @@ public interface PlayerRepository extends JpaRepository<Player, String> {
         p.username,
         p.avatarUrl,
         COUNT(n)
-      )
+      )xdgfdsfgdsfgds
       FROM Player p
-      LEFT JOIN p.nfts n
+      LEFT JOIN p.inventory n
       GROUP BY p.walletId, p.username, p.avatarUrl
       ORDER BY COUNT(n) DESC
     """)

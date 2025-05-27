@@ -12,7 +12,13 @@ import java.util.List;
 public interface NftCollectionRepository extends JpaRepository<NftCollection, Long> {
     public NftCollection findByName(String name);
     public NftCollection findFirstByOrderByIdDesc();
-    int countByCollection_Id(Long collectionId);
+
+    @Query("""
+      SELECT COUNT(n)
+      FROM Nft n
+      WHERE n.collection.id = :collectionId
+    """)
+    int countByCollectionId(Long collectionId);
 
     @Query("""
       SELECT new take_nft.ru.takeNft.dto.BestCollectionDto(

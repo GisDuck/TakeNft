@@ -17,7 +17,7 @@ public class NftCollectionService {
 
     public HeroDto getHeroCollection() {
         NftCollection collection = nftCollectionRepository.findFirstByOrderByIdDesc();
-        int countNft = nftCollectionRepository.countByCollection_Id(collection.getId());
+        int countNft = nftCollectionRepository.countByCollectionId(collection.getId());
 
         return new HeroDto(
                 collection.getId(),

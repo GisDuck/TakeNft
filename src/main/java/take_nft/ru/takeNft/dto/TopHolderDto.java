@@ -4,5 +4,5 @@ public record TopHolderDto(
         String walletId,
         String username,
         String avatarUrl,
-        int nftCount
+        long nftCount
 ) {}

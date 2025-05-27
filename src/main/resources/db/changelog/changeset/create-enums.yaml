@@ -7,13 +7,20 @@ databaseChangeLog:
             splitStatements: false
             stripComments: false
             sql: |
-              CREATE TYPE add_friends_setting AS ENUM (
-                'nobody',
-                'friends of friends',
-                'all'
-              );
-              CREATE TYPE send_duel_setting AS ENUM (
-                'nobody',
-                'friends',
-                'all'
-              );
+              DO $$ BEGIN
+                IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'add_friends_setting') THEN
+                  CREATE TYPE add_friends_setting AS ENUM (
+                    'nobody',
+                    'friends of friends',
+                    'all'
+                  );
+                END IF;
+                
+                IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'send_duel_setting') THEN
+                  CREATE TYPE send_duel_setting AS ENUM (
+                    'nobody',
+                    'friends',
+                    'all'
+                  );
+                END IF;
+              END $$;
