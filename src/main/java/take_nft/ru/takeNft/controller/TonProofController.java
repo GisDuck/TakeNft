@@ -5,6 +5,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import take_nft.ru.takeNft.service.TonProofService;
@@ -16,13 +17,10 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/ton-proof")
 public class TonProofController {
-    private final TonProofService tonProofService;
+    @Autowired
+    private TonProofService tonProofService;
 
     private static final Logger log = LoggerFactory.getLogger(TonProofController.class);
-
-    public TonProofController(TonProofService TonProofService) {
-        this.tonProofService = TonProofService;
-    }
 
     //Получить payload для ton proof подписи
     @GetMapping("payload")
