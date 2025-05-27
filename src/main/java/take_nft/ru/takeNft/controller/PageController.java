@@ -23,6 +23,7 @@ public class PageController {
     public String index(Model model) {
         model.addAttribute("topHolders", playerService.getTopHolders(10));
         model.addAttribute("hero", nftCollectionService.getHeroCollection());
+        model.addAttribute("bestCollections", nftCollectionService.getBestCollections());
         return "index";
     }
 

@@ -16,7 +16,7 @@
 
   <div id="content">
     <section id="hero">
-      <a th:href="'/nft/' + ${hero.id}">
+      <a th:href="'/collection/' + ${hero.id}">
       <div class="hero-content">
         <h1 th:text="${hero.name}">#nft-collection-name</h1>
         <p th:text="'count: ' + ${hero.countNft}">#nft count – 999</p>
@@ -32,11 +32,14 @@
     <h2 class="section-title">BEST NFT COLLECTIONS</h2>
 
     <div id="best-nft">
-      <div class="best-nft-card"><img src="/img/best-nft.png" alt="Rectangle36"><p>#name</p></div>
-      <div class="best-nft-card"><img src="/img/best-nft.png" alt="Rectangle36"><p>#name</p></div>
-      <div class="best-nft-card"><img src="/img/best-nft.png" alt="Rectangle36"><p>#name</p></div>
-      <div class="best-nft-card"><img src="/img/best-nft.png" alt="Rectangle36"><p>#name</p></div>
-      <div class="best-nft-card"><img src="/img/best-nft.png" alt="Rectangle36"><p>#name</p></div>
+      <div class="best-nft-card"
+           th:each="col : ${bestCollections}">
+        <a th:href="'/collection/' + ${col.id}">
+        <img th:src="${col.imgUrl}"
+             alt="Cover of [[${col.name}]]"/>
+        <p th:text="${col.name}">#name</p>
+          </a>
+      </div>
     </div>
 
     <h2 class="section-title">TOP HOLDERS NFT</h2>

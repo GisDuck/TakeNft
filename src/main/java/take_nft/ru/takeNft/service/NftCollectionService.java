@@ -1,6 +1,7 @@
 package take_nft.ru.takeNft.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import take_nft.ru.takeNft.dto.BestCollectionDto;
 import take_nft.ru.takeNft.dto.HeroDto;
@@ -24,5 +25,10 @@ public class NftCollectionService {
                 collection.getImgUrl(),
                 countNft
                 );
+    }
+
+    public List<BestCollectionDto> getBestCollections() {
+        // Получить первую страницу (0) размером 5
+        return nftCollectionRepository.findBestCollections(PageRequest.of(0, 5));
     }
 }
