@@ -10,17 +10,17 @@ databaseChangeLog:
               DO $$ BEGIN
                 IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'add_friends_setting') THEN
                   CREATE TYPE add_friends_setting AS ENUM (
-                    'nobody',
-                    'friends of friends',
-                    'all'
+                    'NOBODY',
+                    'FRIENDS OF FRIENDS',
+                    'ALL'
                   );
                 END IF;
                 
                 IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'send_duel_setting') THEN
                   CREATE TYPE send_duel_setting AS ENUM (
-                    'nobody',
-                    'friends',
-                    'all'
+                    'NOBODY',
+                    'FRIENDS',
+                    'ALL'
                   );
                 END IF;
               END $$;

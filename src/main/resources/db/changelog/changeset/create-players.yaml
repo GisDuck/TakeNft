@@ -32,12 +32,12 @@ databaseChangeLog:
               - column:
                   name: who_can_add_friend
                   type: add_friends_setting
-                  defaultValue: 'all'
+                  defaultValue: 'ALL'
                   constraints:
                     nullable: false
               - column:
                   name: who_can_send_duel
                   type: send_duel_setting
-                  defaultValue: 'all'
+                  defaultValue: 'ALL'
                   constraints:
                     nullable: false

@@ -27,8 +27,8 @@ public class PageController {
         return "index";
     }
 
-    @GetMapping("/{page:[^.]+}")
-    public String page(@PathVariable String page) {
-        return "forward:/pages/" + page + ".html";
-    }
+//    @GetMapping("/{page:[^.]+}")
+//    public String page(@PathVariable String page) {
+//        return "forward:/pages/" + page + ".html";
+//    }
 }

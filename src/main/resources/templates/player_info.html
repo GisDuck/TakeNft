@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -9,7 +9,7 @@
   <script src="/js/initialize_header.js"></script>
   <script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
   <script src="https://unpkg.com/@tonconnect/sdk@latest/dist/tonconnect-sdk.min.js"></script>
-  <script type="module" src="/js/player_info.js"></script>
+  <script type="module" src="/js/init_data_href.js"></script>
 </head>
 <body>
 
@@ -20,10 +20,13 @@
       <section id="player-profile">
         <div class="profile-card">
           <div class="profile-avatar">
-            <img id="player-avatar" class="little-circle" src="" alt="avatar">
+            <img id="player-avatar"
+                 class="little-circle"
+                 th:src="${player.avatarUrl}"
+                 alt="avatar">
           </div>
           <div class="profile-info">
-            <h2 id="username"></h2>
+            <h2 th:text="${player.username}">Username</h2>
             <div class="profile-actions">
               <button id="duel-button">Propose a duel</button>
               <button id="friend-button">Add to friends</button>
@@ -32,9 +35,16 @@
         </div>
 
         <div id="inventory-section">
-          <h3>Inventory</h3>
+          <h3>
+            Inventory
+            <span th:text="${#lists.size(player.inventory)}">0</span>
+          </h3>
           <div class="inventory-grid">
-
+            <div class="nft-card"
+                 th:each="nft : ${player.inventory}"
+                 th:attr="data-href=@{'/nft'(id=${nft.id})}">
+              <img th:src="${nft.imgUrl}" alt="NFT">
+            </div>
           </div>
         </div>
       </section>

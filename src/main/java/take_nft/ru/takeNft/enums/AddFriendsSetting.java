@@ -11,9 +11,9 @@ import java.util.Arrays;
 @Getter(onMethod_ = @JsonValue)
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public enum AddFriendsSetting {
-    NOBODY("nobody"),
-    FRIENDS_OF_FRIENDS("friends of friends"),
-    ALL("all");
+    NOBODY("NOBODY"),
+    FRIENDS_OF_FRIENDS("FRIENDS OF FRIENDS"),
+    ALL("ALL");
 
     private final String dbValue;
 

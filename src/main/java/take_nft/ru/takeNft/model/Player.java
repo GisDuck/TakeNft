@@ -30,15 +30,13 @@ public class Player {
     private String email;
 
     @Column(
-            name = "who_can_add_friend",
-            columnDefinition = "add_friends_setting"
+            name = "who_can_add_friend"
     )
     @Enumerated(EnumType.STRING)
     private AddFriendsSetting whoCanAddFriend;
 
     @Column(
-            name = "who_can_send_duel",
-            columnDefinition = "send_duel_setting"
+            name = "who_can_send_duel"
     )
     @Enumerated(EnumType.STRING)
     private SendDuelSetting whoCanSendDuel;

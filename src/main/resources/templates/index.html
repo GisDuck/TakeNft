@@ -16,7 +16,7 @@
 
 
   <div id="content">
-    <section id="hero" th:attr="data-href=@{'/collection/' + ${hero.id}}">
+    <section id="hero" th:attr="data-href=@{'/collection'(id=${hero.id})}">
       <div class="hero-content">
         <h1 th:text="${hero.name}">#nft-collection-name</h1>
         <p th:text="'count: ' + ${hero.nftCount}">#nft count – 999</p>
@@ -33,7 +33,7 @@
     <div id="best-nft">
       <div class="best-nft-card"
            th:each="col : ${bestCollections}"
-           th:attr="data-href=@{'/collection/' + ${col.id}}">
+           th:attr="data-href=@{'/collection'(id=${col.id})}">
         <img th:src="${col.imgUrl}"
              alt="Cover of [[${col.name}]]"/>
         <p th:text="${col.name}">#name</p>
@@ -52,7 +52,7 @@
         </div>
         <ul>
           <li th:each="holder, stat : ${topHolders.subList(0, 5)}"
-              th:attr="data-href=@{'/player/' + ${holder.username}}">
+              th:attr="data-href=@{'/player'(id=${holder.walletId})}">
             <span class="left">
               <span class="rank" th:text="${stat.index+1}">1</span>
               <img class="little-circle"
@@ -73,7 +73,7 @@
         </div>
         <ul>
           <li th:each="holder, stat : ${topHolders.subList(5, 10)}"
-              th:attr="data-href=@{'/player/' + ${holder.username}}">
+              th:attr="data-href=@{'/player'(id=${holder.walletId})}">
             <span class="left">
               <span class="rank" th:text="${stat.index+6}">1</span>
               <img class="little-circle"

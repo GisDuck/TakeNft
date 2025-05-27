@@ -11,9 +11,9 @@ import java.util.Arrays;
 @Getter(onMethod_ = @JsonValue)
 @RequiredArgsConstructor(access = AccessLevel.PRIVATE)
 public enum SendDuelSetting {
-    NOBODY("nobody"),
-    FRIENDS("friends"),
-    ALL("all");
+    NOBODY("NOBODY"),
+    FRIENDS("FRIENDS"),
+    ALL("ALL");
 
     private final String dbValue;
 
