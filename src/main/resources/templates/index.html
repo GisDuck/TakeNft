@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NFT Collection</title>
+  <link href="/css/style.css" type="text/css" rel="stylesheet">
+  <script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
+  <script src="https://unpkg.com/@tonconnect/sdk@latest/dist/tonconnect-sdk.min.js"></script>
+  <script src="/js/initialize_header.js"></script>
+</head>
+<body>
+  <div id="site-header"></div>
+  <div id="wrapper">
+
+
+  <div id="content">
+
+    <section id="hero">
+      <div class="hero-content">
+        <h1>#nft-name</h1>
+        <p>#nft collections – 9999999</p>
+      </div>
+      <div class="hero-image">
+        <img id="hero-img" src="" alt="Rectangle">
+      </div>
+    </section>
+
+    <h2 class="section-title">BEST NFT COLLECTIONS</h2>
+
+    <div id="best-nft">
+      <div class="best-nft-card"><img src="/img/best-nft.png" alt="Rectangle36"><p>#name</p></div>
+      <div class="best-nft-card"><img src="/img/best-nft.png" alt="Rectangle36"><p>#name</p></div>
+      <div class="best-nft-card"><img src="/img/best-nft.png" alt="Rectangle36"><p>#name</p></div>
+      <div class="best-nft-card"><img src="/img/best-nft.png" alt="Rectangle36"><p>#name</p></div>
+      <div class="best-nft-card"><img src="/img/best-nft.png" alt="Rectangle36"><p>#name</p></div>
+    </div>
+
+    <h2 class="section-title">TOP HOLDERS NFT</h2>
+
+    <div id="top-holders">
+ 
+      <div class="table-block" id="top-holders-first-table-block">
+        <div class="table-header">
+          <span class="col-rank">rank</span>
+          <span class="col-nickname">nickname</span>
+          <span class="col-amount">amount nft</span>
+        </div>
+        <ul>
+          <li th:each="holder, stat : ${topHolders.subList(0, 5)}">
+            <a th:href="'/player/' + ${holder.username}">
+            <span class="left">
+              <span class="rank" th:text="${stat.index+1}">1</span>
+              <img class="little-circle"
+                 th:src="${holder.avatarUrl}"
+                 alt=""/>
+              <span class="nick" th:text="${holder.username}">nickname</span>
+            </span>
+            <span class="right" th:text="${holder.nftCount}">0</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="table-block" id="top-holders-second-table-block">
+        <div class="table-header">
+          <span class="col-rank">rank</span>
+          <span class="col-nickname">nickname</span>
+          <span class="col-amount">amount nft</span>
+        </div>
+        <ul>
+          <li th:each="holder, stat : ${topHolders.subList(5, 10)}">
+            <a th:href="'/player/' + ${holder.username}">
+            <span class="left">
+              <span class="rank" th:text="${stat.index+6}">1</span>
+              <img class="little-circle"
+                   th:src="${holder.avatarUrl}"
+                   alt=""/>
+              <span class="nick" th:text="${holder.username}">nickname</span>
+            </span>
+            <span class="right" th:text="${holder.nftCount}">0</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <h2 class="section-title">GET STARTED IN 30 SECONDS!</h2>
+    <div class="cta-buttons">
+
+      <button>CREATE ACCOUNT</button>
+      <button>MAKE NFT</button>
+      <button>START PLAY!</button>
+    </div>
+
+  </div>
+</div>
+
+
+<footer class="footer">
+  <small>© 2023 — 2025 TN. All rights reserved.</small>
+</footer>
+</body>
+</html>

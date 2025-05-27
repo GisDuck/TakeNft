@@ -37,6 +37,10 @@ spring:
     host: localhost
     port: 5672
 
+  web:
+    resources:
+      add-mappings: true
+
 
 logging:
   level:
