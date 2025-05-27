@@ -9,7 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import take_nft.ru.takeNft.service.TonProofService;
 
-import take_nft.ru.takeNft.dto.tonProofRequest;
+import take_nft.ru.takeNft.dto.TonProofRequest;
 
 import java.util.Map;
 
@@ -34,7 +34,7 @@ public class TonProofController {
     //Логин проверяем подпись и создаём HTTP-сессию
     @PostMapping("/login")
     public ResponseEntity<?> login(
-            @RequestBody tonProofRequest tonProofRequest,
+            @RequestBody TonProofRequest tonProofRequest,
             HttpServletRequest request) throws Exception {
         log.info("user login");
 

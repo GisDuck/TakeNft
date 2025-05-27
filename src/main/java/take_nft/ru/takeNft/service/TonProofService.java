@@ -14,9 +14,9 @@ import java.util.Base64;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import take_nft.ru.takeNft.dto.tonProofRequest;
-import take_nft.ru.takeNft.dto.tonProofRequest.AccountJson;
-import take_nft.ru.takeNft.dto.tonProofRequest.ProofJson;
+import take_nft.ru.takeNft.dto.TonProofRequest;
+import take_nft.ru.takeNft.dto.TonProofRequest.AccountJson;
+import take_nft.ru.takeNft.dto.TonProofRequest.ProofJson;
 
 @Service
 public class TonProofService {
@@ -48,7 +48,7 @@ public class TonProofService {
     /**
      * проверяет подпись и удаляет payload после использования
      */
-    public boolean verifyUser(tonProofRequest tonProofRequest) throws Exception {
+    public boolean verifyUser(TonProofRequest tonProofRequest) throws Exception {
         AccountJson accountJson = tonProofRequest.accountJson();
         ProofJson proofJson = tonProofRequest.proofJson();
 

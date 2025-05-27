@@ -1,7 +1,7 @@
 // src/main/java/take_nft/ru/takeNft/dto/ProofRequest.java
 package take_nft.ru.takeNft.dto;
 
-public record tonProofRequest(
+public record TonProofRequest(
         AccountJson accountJson,
         ProofJson proofJson
 ) {
