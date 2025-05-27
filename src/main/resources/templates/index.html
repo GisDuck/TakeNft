@@ -15,15 +15,18 @@
 
 
   <div id="content">
-
     <section id="hero">
+      <a th:href="'/nft/' + ${hero.id}">
       <div class="hero-content">
-        <h1>#nft-name</h1>
-        <p>#nft collections – 9999999</p>
+        <h1 th:text="${hero.name}">#nft-collection-name</h1>
+        <p th:text="'count: ' + ${hero.countNft}">#nft count – 999</p>
       </div>
       <div class="hero-image">
-        <img id="hero-img" src="" alt="Rectangle">
+        <img id="hero-img"
+             th:src="${hero.imgUrl}"
+             alt="Rectangle">
       </div>
+      </a>
     </section>
 
     <h2 class="section-title">BEST NFT COLLECTIONS</h2>
