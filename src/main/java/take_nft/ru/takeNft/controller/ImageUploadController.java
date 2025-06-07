@@ -40,12 +40,6 @@ public class ImageUploadController {
             );
         }
 
-        if (avatarFile.getSize() > 5 * 1024 * 1024) {
-            return ResponseEntity.badRequest().body(
-                    new uploadAvatarRequest("Размер изображения не должен превышать 5 МБ", "")
-            );
-        }
-
         try {
 
             File imgFile = convertToFile(avatarFile);
@@ -55,6 +49,7 @@ public class ImageUploadController {
             imgFile.delete();
 
             log.info("user:{} upload image: {}", address, uploadResult.toString());
+
             return ResponseEntity.ok(
                     new uploadAvatarRequest("successful", uploadResult.get("url").toString())
             );

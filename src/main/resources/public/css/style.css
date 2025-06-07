@@ -945,6 +945,8 @@ nav a:hover {
 
 .avatar-box {
   background: #fff;
+  height: 205px;
+
   border: 2px dashed #ccc;
   border-radius: 16px;
   padding: 24px;
@@ -953,6 +955,17 @@ nav a:hover {
   align-items: center;
   gap: 20px;
 }
+
+#player-avatar-loader {
+  display: none;
+  height:120px;
+  width:120px;
+}
+
+#avatar-upload-button {
+  margin: auto;
+}
+
 .settings-avatar .logout {
   background: #FF4D4F;
   color: #fff;

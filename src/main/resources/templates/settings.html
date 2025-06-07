@@ -9,6 +9,10 @@
   <script src="/js/initialize_header.js"></script>
   <script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
   <script src="https://unpkg.com/@tonconnect/sdk@latest/dist/tonconnect-sdk.min.js"></script>
+  <script
+          src="https://unpkg.com/@dotlottie/player-component@2.7.12/dist/dotlottie-player.mjs"
+          type="module"
+  ></script>
   <script type="module" src="/js/settings.js"></script>
 </head>
 <body>
@@ -26,6 +30,14 @@
                    src=""
                    th:src="${player.avatarUrl}"
                    class="avatar-image" />
+              <dotlottie-player
+                      id ="player-avatar-loader"
+                      src="https://lottie.host/736eb39e-206c-4d4f-8fd2-13abe674fd7e/qi1e0iO0UH.lottie"
+                      background="transparent"
+                      speed="1"
+                      loop
+                      autoplay
+              ></dotlottie-player>
               <button id="avatar-upload-button" class="btn-upload">Upload a new avatar</button>
               <input id="avatar-file" type="file" accept="image/*" style="display: none;" />
             </div>
