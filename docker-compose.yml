@@ -23,6 +23,9 @@ services:
     restart: always
     ports:
       - "6379:6379"
+#    volumes:
+#        - redis_data:/data
+#    command: [ "redis-server", "--save", "60", "1", "--appendonly", "yes" ]
 
   rabbitmq:
     image: rabbitmq:3-management
