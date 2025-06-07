@@ -10,17 +10,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import take_nft.ru.takeNft.dto.*;
-import take_nft.ru.takeNft.enums.AddFriendsSetting;
-import take_nft.ru.takeNft.enums.SendDuelSetting;
+import take_nft.ru.takeNft.model.Player;
 import take_nft.ru.takeNft.service.PlayerService;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Map;
 
 @RestController
@@ -45,10 +38,10 @@ public class PlayerController {
         return ResponseEntity.ok(info);
     }
 
-    @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody @Valid PlayerRegistrationDto playerRegistrationDto,
-                                      BindingResult result,
-                                      HttpServletRequest request) {
+    @PostMapping("/change-settings")
+    public ResponseEntity<?> changeSettings(@RequestBody @Valid PlayerChangeSettingsDto playerChangeSettingsDto,
+                                            BindingResult result,
+                                            HttpServletRequest request) {
         if (result.hasErrors()) {
             String errorMessage = result.getAllErrors().get(0).getDefaultMessage();
             return ResponseEntity.badRequest().body(Map.of("message", errorMessage));
@@ -57,15 +50,20 @@ public class PlayerController {
         String walletId = (String) request.getSession().getAttribute("address");
         if ( walletId == null) return ResponseEntity.status(401).body(new MessageRequest("Not Auth"));
 
-        if (playerService.isTakenUsername(playerRegistrationDto.getUsername())) {
-            return ResponseEntity.badRequest().body(new MessageRequest("Username уже занят"));
+        Player player = playerService.getPlayerByWalletId(walletId);
+
+        if (player == null || player.getUsername() != playerChangeSettingsDto.getUsername()) {
+            if (playerService.isTakenUsername(playerChangeSettingsDto.getUsername())) {
+                return ResponseEntity.badRequest().body(new MessageRequest("Username уже занят"));
+            }
         }
 
-        if (playerService.isTakenEmail(playerRegistrationDto.getEmail())) {
+        if (player == null || player.getEmail() != playerChangeSettingsDto.getUsername())
+        if (playerService.isTakenEmail(playerChangeSettingsDto.getEmail())) {
             return ResponseEntity.badRequest().body(new MessageRequest("Email уже зарегистрирован"));
         }
 
-        playerService.registerNewPlayer(walletId, playerRegistrationDto);
+        playerService.changePlayer(walletId, playerChangeSettingsDto);
         return ResponseEntity.ok(new MessageRequest("User registered"));
     }
 }

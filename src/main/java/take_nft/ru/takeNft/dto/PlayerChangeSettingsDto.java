@@ -8,8 +8,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PlayerRegistrationDto {
-
+public class PlayerChangeSettingsDto {
     @NotBlank(message = "Имя пользователя обязательно")
     @Size(min = 5, max = 20, message = "Username должен содержать от 5 до 20 символов")
     @Pattern(regexp = "^[a-zA-Z0-9_]+$", message = "Username может содержать только латинские буквы, цифры и _")

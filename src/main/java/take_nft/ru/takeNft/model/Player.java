@@ -4,7 +4,7 @@ package take_nft.ru.takeNft.model;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import take_nft.ru.takeNft.dto.PlayerRegistrationDto;
+import take_nft.ru.takeNft.dto.PlayerChangeSettingsDto;
 import take_nft.ru.takeNft.enums.AddFriendsSetting;
 import take_nft.ru.takeNft.enums.SendDuelSetting;
 import lombok.Data;
@@ -62,10 +62,10 @@ public class Player {
     )
     private List<Player> friends = new ArrayList<>();
 
-    public Player(String walletId, PlayerRegistrationDto playerRegistrationDto) {
+    public Player(String walletId, PlayerChangeSettingsDto playerChangeSettingsDto) {
         this.walletId = walletId;
-        this.username = playerRegistrationDto.getUsername();
-        this.email = playerRegistrationDto.getEmail();
-        this.avatarUrl = playerRegistrationDto.getAvatarUrl();
+        this.username = playerChangeSettingsDto.getUsername();
+        this.email = playerChangeSettingsDto.getEmail();
+        this.avatarUrl = playerChangeSettingsDto.getAvatarUrl();
     }
 }
