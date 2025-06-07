@@ -52,7 +52,7 @@
         </div>
         <ul>
           <li th:each="holder, stat : ${topHolders.subList(0, 5)}"
-              th:attr="data-href=@{'/player'(id=${holder.walletId})}">
+              th:attr="data-href=@{'/player'(walletId=${holder.walletId})}">
             <span class="left">
               <span class="rank" th:text="${stat.index+1}">1</span>
               <img class="little-circle"
@@ -73,7 +73,7 @@
         </div>
         <ul>
           <li th:each="holder, stat : ${topHolders.subList(5, 10)}"
-              th:attr="data-href=@{'/player'(id=${holder.walletId})}">
+              th:attr="data-href=@{'/player'(walletId=${holder.walletId})}">
             <span class="left">
               <span class="rank" th:text="${stat.index+6}">1</span>
               <img class="little-circle"

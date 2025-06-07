@@ -1043,4 +1043,8 @@ input:focus {
   cursor: pointer;
 }
 
+.disp-none {
+    display: none
+}
+
 

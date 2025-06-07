@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import take_nft.ru.takeNft.service.PlayerService;
 import take_nft.ru.takeNft.service.TonProofService;
 
 import take_nft.ru.takeNft.dto.TonProofRequest;
@@ -19,6 +20,8 @@ import java.util.Map;
 public class TonProofController {
     @Autowired
     private TonProofService tonProofService;
+    @Autowired
+    private PlayerService playerService;
 
     private static final Logger log = LoggerFactory.getLogger(TonProofController.class);
 
@@ -65,21 +68,20 @@ public class TonProofController {
     @GetMapping("/status")
     public ResponseEntity<?> status(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
-
-        log.info("get status");
-
         if (session == null || session.getAttribute("address") == null) {
-
-            log.info("session is null {}", session);
             return ResponseEntity.ok(Map.of(
                     "loggedIn", false,
-                    "address", ""));
+                    "address", "",
+                    "newUser", false
+            ));
         }
 
-        log.info("loggedIn = true {}", session.getAttribute("address"));
+        String address = (String) session.getAttribute("address");
+        boolean isNew = playerService.isNewPlayer(address);
         return ResponseEntity.ok(Map.of(
                 "loggedIn", true,
-                "address", session.getAttribute("address")
+                "address", address,
+                "newUser", isNew
         ));
     }
 }

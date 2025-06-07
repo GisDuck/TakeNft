@@ -41,16 +41,17 @@ spring:
     resources:
       add-mappings: true
 
+      static-locations: classpath:/static/,classpath:/public/,file:uploads/
 
 logging:
   level:
-    root: INFO                  # Общий уровень логирования
-    take_nft: DEBUG             # Ваш пакет — логируем более подробно
+    root: INFO
+    take_nft: DEBUG
     org.springframework.web: WARN
-    org.hibernate.SQL: DEBUG   # Показывать SQL-запросы
-    org.hibernate.type.descriptor.sql.BasicBinder: TRACE # Показывать значения параметров SQL
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
   file:
-    name: logs/take-nft.log     # Имя файла для логов
+    name: logs/take-nft.log
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss} - %logger{36} - %msg%n"
     file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"

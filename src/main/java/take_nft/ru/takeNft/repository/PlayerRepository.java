@@ -12,6 +12,9 @@ import java.util.List;
 public interface PlayerRepository extends JpaRepository<Player, String> {
     public Player findByWalletId(String walletId);
     public Player findByUsername(String username);
+    public boolean existsByWalletId(String walletId);
+    public boolean existsByUsername(String username);
+    public boolean existsByEmail(String email);
 
     @Query("""
       SELECT new take_nft.ru.takeNft.dto.TopHolderDto(
@@ -19,7 +22,7 @@ public interface PlayerRepository extends JpaRepository<Player, String> {
         p.username,
         p.avatarUrl,
         COUNT(n)
-      )xdgfdsfgdsfgds
+      )
       FROM Player p
       LEFT JOIN p.inventory n
       GROUP BY p.walletId, p.username, p.avatarUrl

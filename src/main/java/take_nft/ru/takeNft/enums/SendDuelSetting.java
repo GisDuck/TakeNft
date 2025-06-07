@@ -17,12 +17,5 @@ public enum SendDuelSetting {
 
     private final String dbValue;
 
-    @JsonCreator
-    public static SendDuelSetting fromDbValue(String value) {
-        return Arrays.stream(values())
-                .filter(v -> v.dbValue.equals(value))
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("Unknown SendDuelSetting: " + value));
-    }
 }
 

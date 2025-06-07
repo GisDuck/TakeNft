@@ -1,6 +1,7 @@
 // src/main/java/take_nft/ru/takeNft/service/AuthService.java
 package take_nft.ru.takeNft.service;
 
+import io.github.cdimascio.dotenv.Dotenv;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -22,14 +23,16 @@ import take_nft.ru.takeNft.dto.TonProofRequest.ProofJson;
 public class TonProofService {
     private final Map<String, Long> payloads = new ConcurrentHashMap<>();
     private final SecureRandom random = new SecureRandom();
-    private static final long MAX_PAYLOAD_AGE = 15 * 60; // 15 минут
-    private static final String BASE_URL = "dodbo.ru";
-    private static final String API_KEY = "AFI5HJFETSJN5WIAAAAJBLPJELQRNRJXGE4NSOWHRAEEMMUWTWYUIUBQRWU3JGJKK4YNQXQ";
+
+    private static Dotenv dotenv = Dotenv.load();
+    private static final long MAX_PAYLOAD_AGE = Long.parseLong(dotenv.get("MAX_PAYLOAD_AGE")); // 15 минут
+    private static final String BASE_URL = dotenv.get("BASE_URL");
+    private static final String TON_API_KEY = dotenv.get("TON_API_KEY");
 
     private static final Logger log = LoggerFactory.getLogger(TonProofService.class);
 
     private final Tonapi tonapi = new Tonapi(
-            API_KEY,
+            TON_API_KEY,
             false,
             10);
 

@@ -1,46 +1,54 @@
-const nickInput = document.getElementById("nickname"),
-emailInput = document.getElementById("email"),
-playerAvatarImg = document.getElementById("player-avatar"),
-duelSel   = document.getElementById("duel-permission"),
-friendSel = document.getElementById("friend-permission");
-
-fetch("/data/account_settings.json")
-  .then(res => res.json())
-  .then(data => {
-
-    playerAvatarImg.src = data.playerAvatarUrl;
-    nickInput.value = data.nickname;
-    emailInput.value = data.email;
-
-duelSel.value   = data.duelPermission;
-friendSel.value = data.friendPermission;
-
-})
-.catch(err => {
-  console.error("Ошибка загрузки данных пользователя:", err);
-  title.textContent = "Ошибка загрузки данных";
+document.getElementById('avatar-upload-button').addEventListener('click', () => {
+  document.getElementById('avatar-file').click();
 });
 
+let avatarUrl = 'img/no_avatar.png';
 
-const avatarInput = document.getElementById("avatar-upload");
-const avatarImg = document.getElementById("settings-avatar-img");
-
-avatarInput.addEventListener("change", e => {
+document.getElementById('avatar-file').addEventListener('change', async (e) => {
   const file = e.target.files[0];
   if (!file) return;
-  const reader = new FileReader();
-  reader.onload = ev => {
-    avatarImg.src = ev.target.result;
 
-  };
-  reader.readAsDataURL(file);
+  const formData = new FormData();
+  formData.append('avatar', file);
+
+  const res = await fetch('/api/upload-avatar', {
+    method: 'POST',
+    credentials: 'include',
+    body: formData
+  });
+
+  const result = await res.json();
+
+  if (res.ok) {
+    avatarUrl = result.avatarUrl;
+    document.getElementById('player-avatar').src = avatarUrl;
+  } else {
+    alert(result.message || 'Ошибка загрузки');
+  }
 });
 
 
-document.getElementById("logout-button").addEventListener("click", async () => {
 
-  await tonConnectUI.disconnect();
 
-  localStorage.clear();
-  window.location.href = "index.html";
+
+document.getElementById('save-button').addEventListener('click', async () => {
+  const registerForm = {
+    username: document.getElementById('nickname').value,
+    email: document.getElementById('email').value,
+    avatarUrl: avatarUrl,
+    duelPermission: document.getElementById('duel-permission').value.toUpperCase(),
+    friendPermission: document.getElementById('friend-permission').value.toUpperCase()
+  };
+  const res = await fetch('/api/player/register', {
+    method: 'POST',
+    credentials: 'include',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(registerForm)
+  });
+  if (res.ok) {
+    window.location.href = '/';
+  } else {
+    const { message } = await res.json();
+      alert(message || 'Ошибка при сохранении настроек');
+  }
 });

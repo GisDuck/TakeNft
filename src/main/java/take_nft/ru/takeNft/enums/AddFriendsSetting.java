@@ -17,13 +17,6 @@ public enum AddFriendsSetting {
 
     private final String dbValue;
 
-    @JsonCreator
-    public static AddFriendsSetting fromDbValue(String value) {
-        return Arrays.stream(values())
-                .filter(v -> v.dbValue.equals(value))
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("Unknown AddFriendsSetting: " + value));
-    }
 }
 //print chift return hydtusfigyvygksvfkgywfityqrfjgyvfjgrfcjtfyjrqfgrqfytfrqjgyrfjbhavjvagyighkgqbaifhbkgn
 

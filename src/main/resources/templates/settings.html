@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
@@ -22,22 +22,26 @@
           <div class="settings-avatar">
  
             <div class="avatar-box">
-              <img id="player-avatar" alt="avatar" class="avatar-image">
+              <img id="player-avatar"
+                   src=""
+                   th:src="${player.avatarUrl}"
+                   class="avatar-image" />
               <button id="avatar-upload-button" class="btn-upload">Upload a new avatar</button>
+              <input id="avatar-file" type="file" accept="image/*" style="display: none;" />
             </div>
           
-            <button id="logout-button" class="logout">Log out</button>
+            <button id="logout-button" th:class="'logout ' + ${logoutDisplay}">Log out</button>
           </div>
       
           
           <div class="settings-list">
             <div class="field-item">
               <label for="nickname">Nickname</label>
-              <input type="text" id="nickname" name="nickname" value="CurrentName">
+              <input type="text" id="nickname" name="nickname" th:value="${player.username}">
             </div>
             <div class="field-item">
               <label for="email">Email</label>
-              <input type="email" id="email" name="email" value="user@example.com">
+              <input type="email" id="email" name="email" th:value="${player.email}">
             </div>
             <div class="privacy-section">
               <h3>Privacy and Settings</h3>

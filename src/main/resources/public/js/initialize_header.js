@@ -11,7 +11,11 @@ document.addEventListener("DOMContentLoaded", () => {
         headerContainer.innerHTML = html;
 
         initializeTONConnect();
-        checkLoginStatus();
+
+        if (!window.location.pathname.includes('/register')) {
+          checkLoginStatus();
+        }
+
         initializeMenu();
 
       })
@@ -28,7 +32,7 @@ function initializeTONConnect() {
         buttonRootId: 'ton-connect-button'
     });
 
-    // 1️⃣ При клике на кнопку “Подключить кошелёк” запрашиваем у бэкенда payload для TON-proof
+    // При клике на кнопку “Подключить кошелёк” запрашиваем у бэкенда payload для TON-proof
     const btn = document.getElementById('ton-connect-button');
     btn.addEventListener('click', async () => {
         try {
@@ -64,7 +68,7 @@ function initializeTONConnect() {
         }
     });
 
-    // 2️⃣ Слушаем изменение статуса: как только придёт подписанный proof — шлём его на проверку
+    //Слушаем изменение статуса: как только придёт подписанный proof — шлём его на проверку
     tonConnectUI.onStatusChange(wallet => {
             console.log(wallet)
             if (wallet && wallet.connectItems?.tonProof && 'proof' in wallet.connectItems.tonProof) {
@@ -100,34 +104,34 @@ async function loginTonProof(account, proof) {
 
 async function checkLoginStatus() {
   try {
-    const response = await fetch('/api/ton-proof/status', {
+    const statusRes = await fetch('/api/ton-proof/status', {
       method: 'GET',
       credentials: 'include'
     });
+    const status = await statusRes.json();
 
-    if (!response.ok) {
-      throw new Error(`Сервер вернул ${response.status}`);
-    }
-
-    // распарсим JSON { loggedIn: boolean, address: string | null }
-    const data = await response.json();
-
-    console.log('Status response:', data);
-    if (data.loggedIn) {
-      // пользователь залогинен
-      console.log('Адрес из сессии:', data.address);
-      // например, показываем его в header:
-      document.getElementById('account-img').style.display = "block";
+    if (status.loggedIn) {
+        if (status.newUser) {
+            window.location.href = '/register';
+            return;
+        }
+      // Скрываем кнопку, показываем img
       document.getElementById('ton-connect-button').style.display = "none";
-    } else {
-      // не залогинен
-      console.log('Пользователь не залогинен');
+      const imgEl = document.getElementById('account-img');
+
+      // Достаём URL аватарки
+      const playerRes = await fetch('/api/player/me', {
+        method: 'GET',
+        credentials: 'include'
+      });
+      if (playerRes.ok) {
+        const { avatarUrl } = await playerRes.json();
+        imgEl.src = avatarUrl;
+      }
+      imgEl.style.display = "block";
     }
-
-    return data;
-
   } catch (err) {
-    console.error('Не удалось получить статус:', err);
+    console.error('Не удалось получить статус или профиль:', err);
   }
 }
 

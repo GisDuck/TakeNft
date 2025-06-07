@@ -20,8 +20,9 @@ public class InfoController {
     public NftCollectionService nftCollectionService;
 
     @GetMapping("/player")
-    public String playerPage(@RequestParam("id") String walletId, Model model) {
+    public String playerPage(@RequestParam("walletId") String walletId, Model model) {
         Player player = playerService.getPlayerByWalletId(walletId);
+        log.info("словили игрока с id: {}", walletId);
         model.addAttribute("player", player);
         return "player_info";  // src/main/resources/templates/player_info.html
     }
