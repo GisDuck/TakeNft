@@ -11,7 +11,7 @@ databaseChangeLog:
                 IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'add_friends_setting') THEN
                   CREATE TYPE add_friends_setting AS ENUM (
                     'NOBODY',
-                    'FRIENDS OF FRIENDS',
+                    'FRIENDS_OF_FRIENDS',
                     'ALL'
                   );
                 END IF;

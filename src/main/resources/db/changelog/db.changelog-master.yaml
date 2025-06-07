@@ -1,16 +1,16 @@
 databaseChangeLog:
   - include:
-      file: db/changelog/changeset/create-enums.yaml
+      file: db/changelog/changeset/create-enums-01.yaml
   - include:
-      file: db/changelog/changeset/create-players.yaml
+      file: db/changelog/changeset/create-players-02.yaml
   - include:
-      file: db/changelog/changeset/create-nft-collections.yaml
+      file: db/changelog/changeset/create-nft-collections-03.yaml
   - include:
-      file: db/changelog/changeset/create-nfts.yaml
+      file: db/changelog/changeset/create-nfts-04.yaml
   - include:
-      file: db/changelog/changeset/create-inventory.yaml
+      file: db/changelog/changeset/create-inventory-05.yaml
   - include:
-      file: db/changelog/changeset/create-friends.yaml
+      file: db/changelog/changeset/create-friends-06.yaml
 
 
 
