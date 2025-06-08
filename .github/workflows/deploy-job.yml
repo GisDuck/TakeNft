@@ -23,11 +23,11 @@ jobs:
     runs-on: self-hosted
     needs: test
     steps:
-      - name: Remove build/libs if exists
-        run: |
-          if [ -d "./TakeNft/build/libs" ]; then
-            rm -rf ./TakeNft/build/libs
-          fi
+      - name: Stop backend container if running
+        run: docker compose -f ./docker-compose.yml stop backend-service || true
+
+      - name: Remove backend container if exists
+        run: docker compose -f ./docker-compose.yml rm -f backend-service || true
 
       - name: Checkout repo
         uses: actions/checkout@v3
