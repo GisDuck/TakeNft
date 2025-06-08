@@ -5,23 +5,23 @@ on:
     branches: [ "master", "main", "develop" ]
 
 jobs:
-  hoba:
+  hobs:
     runs-on: ubuntu-latest
     name: Deploy with rsync exclude and run Docker
     steps:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Deploy with Exclude Patterns
-        uses: wlixcc/SFTP-Deploy-Action@v1.2.6
-        with:
-          username: 'root'
-          server: 'takenft.ru'
-          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
-          local_path: './'
-          remote_path: '/var/www/app'
-          rsyncArgs: '--exclude=node_modules --exclude=.git --exclude=*.log'
-          sftpArgs: '-o ConnectTimeout=5'
+#      - name: Deploy with Exclude Patterns
+#        uses: wlixcc/SFTP-Deploy-Action@v1.2.6
+#        with:
+#          username: 'root'
+#          server: 'takenft.ru'
+#          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+#          local_path: './'
+#          remote_path: '/var/www/app'
+#          rsyncArgs: '--exclude=node_modules --exclude=.git --exclude=*.log'
+#          sftpArgs: '-o ConnectTimeout=5'
 
       - name: Run Docker on remote server
         uses: appleboy/ssh-action@v0.1.10
