@@ -28,7 +28,7 @@ jobs:
         with:
           host: 'takenft.ru'
           username: 'root'
-          key: ${{ secrets.SSH_PRIVATE_KEY} }
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             cd /var/www/app
             docker compose -f ./docker-compose.yml stop
