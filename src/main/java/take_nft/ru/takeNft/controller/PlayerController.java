@@ -44,7 +44,7 @@ public class PlayerController {
                                             HttpServletRequest request) {
         if (result.hasErrors()) {
             String errorMessage = result.getAllErrors().get(0).getDefaultMessage();
-            return ResponseEntity.badRequest().body(Map.of("message", errorMessage));
+            return ResponseEntity.badRequest().body(new MessageRequest(errorMessage));
         }
 
         String walletId = (String) request.getSession().getAttribute("address");
@@ -52,13 +52,16 @@ public class PlayerController {
 
         Player player = playerService.getPlayerByWalletId(walletId);
 
-        if (player == null || player.getUsername() != playerChangeSettingsDto.getUsername()) {
+        log.debug(player.toString());
+        log.debug(playerChangeSettingsDto.toString());
+
+        if (player == null || !player.getUsername().equals(playerChangeSettingsDto.getUsername())) {
             if (playerService.isTakenUsername(playerChangeSettingsDto.getUsername())) {
                 return ResponseEntity.badRequest().body(new MessageRequest("Username уже занят"));
             }
         }
 
-        if (player == null || player.getEmail() != playerChangeSettingsDto.getUsername())
+        if (player == null || !player.getEmail().equals(playerChangeSettingsDto.getEmail()))
         if (playerService.isTakenEmail(playerChangeSettingsDto.getEmail())) {
             return ResponseEntity.badRequest().body(new MessageRequest("Email уже зарегистрирован"));
         }

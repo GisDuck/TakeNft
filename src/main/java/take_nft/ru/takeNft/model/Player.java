@@ -4,6 +4,7 @@ package take_nft.ru.takeNft.model;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import org.apache.commons.lang3.EnumUtils;
 import take_nft.ru.takeNft.dto.PlayerChangeSettingsDto;
 import take_nft.ru.takeNft.enums.AddFriendsSetting;
 import take_nft.ru.takeNft.enums.SendDuelSetting;
@@ -35,11 +36,11 @@ public class Player {
     private String email;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "who_can_add_friend", columnDefinition = "add_friends_setting")
+    @Column(name = "who_can_add_friend")
     private AddFriendsSetting whoCanAddFriend;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "who_can_send_duel", columnDefinition = "send_duel_setting")
+    @Column(name = "who_can_send_duel")
     private SendDuelSetting whoCanSendDuel;
 
 
@@ -67,5 +68,16 @@ public class Player {
         this.username = playerChangeSettingsDto.getUsername();
         this.email = playerChangeSettingsDto.getEmail();
         this.avatarUrl = playerChangeSettingsDto.getAvatarUrl();
+
+        String duel = playerChangeSettingsDto.getDuelPermission();
+        String friend = playerChangeSettingsDto.getFriendPermission();
+
+        this.whoCanSendDuel = SendDuelSetting.valueOf(duel.toUpperCase());
+
+        if (friend.toUpperCase().equals("FRIENDS OF FRIENDS")) {
+            this.whoCanAddFriend = AddFriendsSetting.FRIENDS_OF_FRIENDS;
+        } else {
+            this.whoCanAddFriend = AddFriendsSetting.valueOf(friend.toUpperCase());
+        }
     }
 }

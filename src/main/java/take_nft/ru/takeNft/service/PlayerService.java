@@ -66,9 +66,6 @@ public class PlayerService {
     public Player changePlayer(String walletId,
                                PlayerChangeSettingsDto playerChangeSettingsDto) {
 
-        playerChangeSettingsDto.getDuelPermission();
-        playerChangeSettingsDto.getFriendPermission();
-
         return playerRepository.save(
             new Player(walletId, playerChangeSettingsDto)
         );

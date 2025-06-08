@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import take_nft.ru.takeNft.dto.SettingsPlayerRequest;
 import take_nft.ru.takeNft.service.PlayerService;
 
@@ -18,7 +17,12 @@ public class SettingsController {
     public PlayerService playerService;
 
     @GetMapping("/register")
-    public String registerPage(Model model) {
+    public String registerPage(Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        if (session != null || session.getAttribute("address") != null) {
+            return "forward:/";
+        }
+
         model.addAttribute(
                 "player",
                 new SettingsPlayerRequest(
@@ -34,7 +38,7 @@ public class SettingsController {
     }
 
     @GetMapping("/settings")
-    public String settingsPage(@RequestParam("walletId") String walletId, Model model, HttpServletRequest request) {
+    public String settingsPage(Model model, HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         if (session == null || session.getAttribute("address") == null) {
             return "forward:/";

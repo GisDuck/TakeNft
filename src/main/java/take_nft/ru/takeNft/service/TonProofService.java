@@ -21,6 +21,7 @@ import take_nft.ru.takeNft.dto.TonProofRequest.ProofJson;
 
 @Service
 public class TonProofService {
+//    Эту мапу надо переделать в Redis!!!!!!
     private final Map<String, Long> payloads = new ConcurrentHashMap<>();
     private final SecureRandom random = new SecureRandom();
 
