@@ -41,9 +41,9 @@ services:
     image: openjdk:17
     container_name: takenft_app
     volumes:
-      - ./build/libs/takenft.jar:takenft.jar
+      - ./build/libs/takenft.jar:/app/takenft.jar
       - ./.env:/.env
-    command: ["java", "-jar", "takenft.jar"]
+    command: ["java", "-jar", "/app/takenft.jar"]
     depends_on:
       - postgres
       - redis
