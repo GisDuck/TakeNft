@@ -24,18 +24,15 @@ jobs:
     needs: test
     steps:
       - name: Stop backend container if running
-        run: docker compose -f ./docker-compose.yml stop backend-service || true
+        run: docker compose -f ./docker-compose.yml stop
 
-      - name: Remove backend container if exists
-        run: docker compose -f ./docker-compose.yml rm -f backend-service || true
+      - name: remove app containers only
+        run: |
+          docker compose rm backend-service
 
       - name: Checkout repo
         uses: actions/checkout@v3
 
-      - name: Stop and remove app containers only
-        run: |
-          docker compose stop backend-service
-          docker compose rm backend-service
   deploy:
     runs-on: self-hosted
     needs: prepare-environment
