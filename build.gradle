@@ -62,3 +62,7 @@ lombok {
 	version = '1.18.26'
 	sha256 = ""
 }
+
+bootJar {
+	archiveFileName = 'takenft.jar'
+}
