@@ -26,17 +26,10 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
 
-      - name: Show current dir and files
-        run: |
-          pwd
-          ls -la
-          ls -la TakeNft
-          ls -la TakeNft/TakeNft
-
       - name: Stop and remove app containers only
         run: |
-          docker compose -f /home/user/actions-runner/_work/TakeNft/docker-compose.yml stop backend-service
-          docker compose -f /home/user/actions-runner/_work/TakeNft/docker-compose.yml rm backend-service
+          docker compose stop backend-service
+          docker compose rm backend-service
   deploy:
     runs-on: self-hosted
     needs: prepare-environment
@@ -44,5 +37,5 @@ jobs:
       - name: checkout repo
         uses: actions/checkout@v3
       - name: docker compose
-        run: docker compose -f /home/user/actions-runner/_work/TakeNft/docker-compose.yml up -d
+        run: docker compose up -d
 
