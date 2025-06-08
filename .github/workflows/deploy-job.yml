@@ -25,10 +25,8 @@ jobs:
     steps:
       - name: Stop and remove app containers only
         run: |
-          docker compose stop
+          docker compose -f ./docker-compose.yml stop backend-service
           docker compose rm -f backend-service
-      - name: Clean app images
-        run: docker image prune -f
   deploy:
     runs-on: self-hosted
     needs: prepare-environment
@@ -36,5 +34,5 @@ jobs:
       - name: checkout repo
         uses: actions/checkout@v3
       - name: docker compose
-        run: docker compose up -d
+        run: docker compose -f ./docker-compose.yml up -d
 
