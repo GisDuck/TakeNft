@@ -19,6 +19,15 @@ jobs:
           distribution: 'temurin'
           cache: gradle
 
+      - name: Grant execute permission for Gradle wrapper
+        run: chmod +x ./gradlew
+
+      - name: Build with Gradle
+        run: ./gradlew bootJar
+
+      - name: Show built JAR
+        run: ls -lh build/libs
+
   prepare-environment:
     runs-on: self-hosted
     needs: test
@@ -39,15 +48,6 @@ jobs:
     steps:
       - name: checkout repo
         uses: actions/checkout@v3
-      - name: Grant execute permission for Gradle wrapper
-        run: chmod +x ./gradlew
-
-      - name: Build with Gradle
-        run: ./gradlew bootJar
-
-      - name: Show built JAR
-        run: ls -lh build/libs
-
       - name: docker compose
         run: docker compose up -d
 
