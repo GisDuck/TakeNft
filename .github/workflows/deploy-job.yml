@@ -12,16 +12,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-#      - name: Deploy with Exclude Patterns
-#        uses: wlixcc/SFTP-Deploy-Action@v1.2.6
-#        with:
-#          username: 'root'
-#          server: 'takenft.ru'
-#          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
-#          local_path: './'
-#          remote_path: '/var/www/app'
-#          rsyncArgs: '--exclude=node_modules --exclude=.git --exclude=*.log'
-#          sftpArgs: '-o ConnectTimeout=5'
+      - name: deploy file
+        uses: wlixcc/SFTP-Deploy-Action@v1.0
+        with:
+          username: 'root'
+          server: 'takenft.ru'
+          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
+          local_path: './'
+          remote_path: '/var/www/app'
+          args: '-o ConnectTimeout=5'
 
       - name: Run Docker on remote server
         uses: appleboy/ssh-action@v0.1.10
