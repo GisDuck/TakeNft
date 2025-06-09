@@ -117,6 +117,7 @@ async function checkLoginStatus() {
             return;
         }
       // Скрываем кнопку, показываем img
+      document.getElementById('ton-connect-button').style.display = "none"
       const imgEl = document.getElementById('account-img');
 
       // Достаём URL аватарки
