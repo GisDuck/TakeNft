@@ -41,7 +41,8 @@ public class ImageUploadController {
         }
 
         try {
-            log.info("user:{} upload image: {}", address);
+            log.info("cloudinary: {}", cloudinary.toString());
+            log.info("user:{} upload image", address);
 
 
             File imgFile = convertToFile(avatarFile);
@@ -57,6 +58,7 @@ public class ImageUploadController {
             );
 
         } catch (IOException e) {
+            log.error(e.toString());
             return ResponseEntity.status(500).body(
                     new uploadAvatarRequest("Ошибка загрузки файла", "")
             );
