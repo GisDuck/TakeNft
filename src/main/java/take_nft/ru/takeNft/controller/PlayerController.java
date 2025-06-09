@@ -71,6 +71,6 @@ public class PlayerController {
         }
 
         playerService.changePlayer(walletId, playerChangeSettingsDto);
-        return ResponseEntity.ok(new MessageRequest("User registered"));
+        return ResponseEntity.ok(new MessageRequest("User change settings"));
     }
 }

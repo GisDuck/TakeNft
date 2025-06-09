@@ -39,8 +39,9 @@ document.getElementById('avatar-file').addEventListener('change', async (e) => {
       // Тело ответа пустое — можно проигнорировать или логгировать
     }
 
+    avatarUrl = result.avatarUrl
     if (res.ok) {
-      document.getElementById('player-avatar').src = result.avatarUrl;
+      document.getElementById('player-avatar').src = avatarUrl;
     } else {
       alert(result.message || 'Ошибка загрузки аватара');
     }
