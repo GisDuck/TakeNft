@@ -28,7 +28,7 @@ let tonConnectUI;
 
 function initializeTONConnect() {
     tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
-        manifestUrl: 'https://dodbo.ru/tonconnect-manifest.json',
+        manifestUrl: 'https://takenft.ru/tonconnect-manifest.json',
         buttonRootId: 'ton-connect-button'
     });
 
