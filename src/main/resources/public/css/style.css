@@ -264,6 +264,7 @@ nav a:hover {
   font-weight: 400;
   font-size: clamp(16px, 2.3vw, 32px);
   margin-left: 20px;
+  margin-right: 20px;
   margin-top: 10px;
   margin-bottom: 50px;
 
