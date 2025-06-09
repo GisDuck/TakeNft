@@ -46,6 +46,7 @@ services:
     volumes:
       - ./build/libs/takenft.jar:/app/takenft.jar
       - ./.env:/.env
+      - ./logs:/logs
     env_file:
       - .env
     command: ["java", "-jar", "/app/takenft.jar"]
