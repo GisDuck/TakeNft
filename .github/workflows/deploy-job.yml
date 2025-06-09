@@ -7,30 +7,24 @@ on:
 jobs:
   hobs:
     runs-on: ubuntu-latest
-    name: Deploy with rsync exclude and run Docker
+    name: Deploy and run Docker
     steps:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: deploy file
-        uses: wlixcc/SFTP-Deploy-Action@v1.0
-        with:
-          username: 'root'
-          server: 'takenft.ru'
-          ssh_private_key: ${{ secrets.SSH_PRIVATE_KEY }}
-          local_path: './'
-          remote_path: '/var/www/app'
-          args: '-o ConnectTimeout=5'
-
-      - name: Run Docker on remote server
+      - name: deploy file and run Docker on remote server
         uses: appleboy/ssh-action@v0.1.10
         with:
           host: 'takenft.ru'
           username: 'root'
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            cd /var/www/app
+            sudo systemctl restart nginx
+            cd app/TakeNft/
+            
+            git pull origin master
             docker compose -f ./docker-compose.yml stop
             docker compose rm backend-service
+            
             ./gradlew bootJar
             docker compose up -d --build
