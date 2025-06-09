@@ -7,10 +7,12 @@ import com.cloudinary.Cloudinary;
 import jakarta.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import take_nft.ru.takeNft.dto.*;
+import take_nft.ru.takeNft.service.MinioService;
 
 import java.io.File;
 import java.io.IOException;
@@ -19,8 +21,8 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api")
 public class ImageUploadController {
-    private Dotenv dotenv = Dotenv.load();
-    private Cloudinary cloudinary = new Cloudinary(dotenv.get("CLOUDINARY_URL"));
+    @Autowired
+    private MinioService minioService;
 
     private static final Logger log = LoggerFactory.getLogger(ImageUploadController.class);
 
@@ -41,20 +43,14 @@ public class ImageUploadController {
         }
 
         try {
-            log.info("cloudinary: {}", cloudinary.toString());
             log.info("user:{} upload image", address);
 
+            String imgUrl = minioService.uploadAvatar(avatarFile);
 
-            File imgFile = convertToFile(avatarFile);
-
-            Map uploadResult = cloudinary.uploader().upload(imgFile, ObjectUtils.emptyMap());
-
-            imgFile.delete();
-
-            log.info("successful user:{} upload image: {}", address, uploadResult.toString());
+            log.info("successful user:{} upload image: {}", address, imgUrl);
 
             return ResponseEntity.ok(
-                    new uploadAvatarRequest("successful", uploadResult.get("url").toString())
+                    new uploadAvatarRequest("successful", imgUrl)
             );
 
         } catch (Exception e) {
