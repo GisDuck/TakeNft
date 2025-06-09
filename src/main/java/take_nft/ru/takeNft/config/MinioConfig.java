@@ -1,21 +1,18 @@
 package take_nft.ru.takeNft.config;
 
+import io.github.cdimascio.dotenv.Dotenv;
 import io.minio.MinioClient;
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class MinioConfig {
+    private static Dotenv dotenv = Dotenv.load();
 
-    @Value("${minio.url}")
-    private String url;
-
-    @Value("${minio.access-key}")
-    private String accessKey;
-
-    @Value("${minio.secret-key}")
-    private String secretKey;
+    private String url = dotenv.get("MINIO_URL");
+    private String accessKey = dotenv.get("MINIO_ROOT_USER");
+    private String secretKey = dotenv.get("MINIO_ROOT_PASSWORD");
 
     @Bean
     public MinioClient minioClient() {

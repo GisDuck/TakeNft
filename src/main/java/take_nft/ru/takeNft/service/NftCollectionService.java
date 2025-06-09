@@ -15,6 +15,8 @@ public class NftCollectionService {
     @Autowired
     private NftCollectionRepository nftCollectionRepository;
 
+    private MinioService minioService;
+
     public HeroDto getHeroCollection() {
         NftCollection collection = nftCollectionRepository.findFirstByOrderByIdDesc();
         int countNft = nftCollectionRepository.countByCollectionId(collection.getId());
