@@ -14,12 +14,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (!window.location.pathname.includes('/register')) {
           checkLoginStatus();
-        }
+        } else {
+        document.getElementById('ton-connect-button').style.display = "flex"}
 
         initializeMenu();
-        setTimeout(() => {
-            document.getElementById('header').style.display = "flex";
-        }, 500);
 
       })
       .catch(err => {
@@ -119,7 +117,6 @@ async function checkLoginStatus() {
             return;
         }
       // Скрываем кнопку, показываем img
-      document.getElementById('ton-connect-button').style.display = "none";
       const imgEl = document.getElementById('account-img');
 
       // Достаём URL аватарки
@@ -132,6 +129,8 @@ async function checkLoginStatus() {
         imgEl.src = avatarUrl;
       }
       imgEl.style.display = "block";
+    } else {
+    document.getElementById('ton-connect-button').style.display = "flex"
     }
   } catch (err) {
     console.error('Не удалось получить статус или профиль:', err);
