@@ -1,5 +1,7 @@
 package take_nft.ru.takeNft.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,8 +38,23 @@ public class PageController {
     }
 
     @GetMapping("/friends")
-    public String friends() {
-        return "redirect:/pages/friends.html";
+    public String friends(Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        if (session == null || session.getAttribute("address") == null) {
+            return "forward:/";
+        }
+        String address = (String) session.getAttribute("address");
+
+        model.addAttribute(
+                "invites",
+                playerService.getFriendInvitesByWalletId(address)
+        );
+        model.addAttribute(
+                "friends",
+                playerService.getFriendsByWalletId(address)
+        );
+
+        return "friends";
     }
 
 //    @GetMapping("/{page:[^.]+}")

@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -19,15 +20,38 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/player")
 public class PlayerController {
-    private final PlayerService playerService;
+    @Autowired
+    private PlayerService playerService;
 
     private static final Logger log = LoggerFactory.getLogger(PlayerController.class);
 
-    public PlayerController(PlayerService playerService) {
-        this.playerService = playerService;
+    @PostMapping("/friend-invite")
+    public ResponseEntity<?> friendInvite(@RequestBody FriendInviteDto friendInviteDto,
+                                            BindingResult result,
+                                            HttpServletRequest request) {
+        if (result.hasErrors()) {
+            String errorMessage = result.getAllErrors().get(0).getDefaultMessage();
+            return ResponseEntity.badRequest().body(new MessageRequest(errorMessage));
+        }
+
+        String walletId = (String) request.getSession().getAttribute("address");
+        if (walletId == null) return ResponseEntity.status(401).body(new MessageRequest("Not Auth"));
+
+        if (friendInviteDto.type() == "accept") {
+            playerService.acceptFriendInvite(friendInviteDto.walletId(), walletId);
+        } else {
+            playerService.ignoreFriendInvite(friendInviteDto.walletId(), walletId);
+        }
+
+        return ResponseEntity.ok(new MessageRequest("friend invite changed"));
     }
 
-    @GetMapping("/me")
+
+
+
+
+
+        @GetMapping("/me")
     public ResponseEntity<PlayerIndexInfoDto> me(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         if (session == null || session.getAttribute("address") == null) {

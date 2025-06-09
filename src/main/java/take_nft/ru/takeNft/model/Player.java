@@ -53,17 +53,21 @@ public class Player {
     @Builder.Default
     private List<Nft> inventory = new ArrayList<>();
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-            name = "friends",
-            joinColumns        = @JoinColumn(name = "first_wallet_id"),
-            inverseJoinColumns = @JoinColumn(name = "second_wallet_id"),
-            uniqueConstraints = @UniqueConstraint(
-                    columnNames = {"first_wallet_id","second_wallet_id"}
-            )
+    @OneToMany(
+            mappedBy = "first_wallet_id",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            fetch = FetchType.LAZY
     )
-    @Builder.Default
     private List<Player> friends = new ArrayList<>();
+
+    @OneToMany(
+            mappedBy = "who_is_invited",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true,
+            fetch = FetchType.LAZY
+    )
+    private List<Player> friendInvite;
 
     public Player(String walletId, PlayerChangeSettingsDto playerChangeSettingsDto) {
         this.walletId = walletId;
