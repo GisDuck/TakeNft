@@ -17,7 +17,7 @@ public class MinioService {
     private static Dotenv dotenv = Dotenv.load();
     private static final String BASE_URL = dotenv.get("BASE_URL");
 
-    private String bucket = "uploads/avatars";
+    private String bucket = "uploads";
 
     public String uploadAvatar(MultipartFile file) throws Exception {
         String filename = UUID.randomUUID() + "-" + file.getOriginalFilename();
@@ -32,7 +32,7 @@ public class MinioService {
         return new StringBuilder()
                 .append("https://")
                 .append(BASE_URL)
-                .append("/uploads/")
+                .append('/')
                 .append(bucket)
                 .append('/')
                 .append(filename)
