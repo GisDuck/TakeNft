@@ -19,7 +19,7 @@ public class SettingsController {
     @GetMapping("/register")
     public String registerPage(Model model, HttpServletRequest request) {
         HttpSession session = request.getSession(false);
-        if (session != null || session.getAttribute("address") != null) {
+        if (session == null || session.getAttribute("address") == null) {
             return "forward:/";
         }
 
