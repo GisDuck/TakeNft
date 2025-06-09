@@ -17,7 +17,7 @@ public class MinioService {
     private static Dotenv dotenv = Dotenv.load();
     private static final String BASE_URL = dotenv.get("BASE_URL");
 
-    private String bucket = "avatars";
+    private String bucket = "uploads/avatars";
 
     public String uploadAvatar(MultipartFile file) throws Exception {
         String filename = UUID.randomUUID() + "-" + file.getOriginalFilename();
