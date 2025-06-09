@@ -19,12 +19,13 @@ jobs:
           username: 'root'
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
-            sudo systemctl restart nginx
             cd app/TakeNft/
             
-            git pull origin master
-            docker compose -f ./docker-compose.yml stop
-            docker compose rm backend-service
+            docker compose down
             
+            git pull origin master
             ./gradlew bootJar
-            docker compose up -d --build
+            
+            docker compose up -d
+            
+            sudo systemctl restart nginx

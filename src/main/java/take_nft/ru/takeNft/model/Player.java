@@ -50,6 +50,7 @@ public class Player {
             orphanRemoval = true,
             fetch = FetchType.LAZY
     )
+    @Builder.Default
     private List<Nft> inventory = new ArrayList<>();
 
     @ManyToMany(fetch = FetchType.LAZY)
@@ -61,6 +62,7 @@ public class Player {
                     columnNames = {"first_wallet_id","second_wallet_id"}
             )
     )
+    @Builder.Default
     private List<Player> friends = new ArrayList<>();
 
     public Player(String walletId, PlayerChangeSettingsDto playerChangeSettingsDto) {
