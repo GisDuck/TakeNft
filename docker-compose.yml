@@ -40,7 +40,6 @@ services:
   backend-service:
     image: openjdk:17
     container_name: takenft-app
-    restart: always
     volumes:
       - ./build/libs/takenft.jar:/app/takenft.jar
       - ./.env:/.env
