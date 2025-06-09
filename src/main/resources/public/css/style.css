@@ -77,7 +77,7 @@ nav a {
 }
 
 #ton-connect-button {
-  display: none;
+  display: flex;
   align-items: center;
 }
 
