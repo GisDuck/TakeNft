@@ -57,7 +57,7 @@ public class ImageUploadController {
                     new uploadAvatarRequest("successful", uploadResult.get("url").toString())
             );
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             log.error(e.toString());
             return ResponseEntity.status(500).body(
                     new uploadAvatarRequest("Ошибка загрузки файла", "")

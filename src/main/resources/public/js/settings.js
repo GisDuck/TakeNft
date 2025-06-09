@@ -40,8 +40,7 @@ document.getElementById('avatar-file').addEventListener('change', async (e) => {
     }
 
     if (res.ok) {
-      avatarUrl = result.avatarUrl;
-      document.getElementById('player-avatar').src = avatarUrl;
+      document.getElementById('player-avatar').src = result.avatarUrl;
     } else {
       alert(result.message || 'Ошибка загрузки аватара');
     }
