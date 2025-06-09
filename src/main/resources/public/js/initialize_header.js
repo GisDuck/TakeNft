@@ -37,8 +37,6 @@ function initializeTONConnect() {
     const btn = document.getElementById('ton-connect-button');
     btn.addEventListener('click', async () => {
         try {
-        // В ПРОДЕ УБРАТЬЬЬЬ!!!!!!!!!!!!!!!!
-            tonConnectUI.disconnect()
             // Показываем состояние загрузки
             tonConnectUI.setConnectRequestParameters({ state: 'loading' });
 
@@ -131,7 +129,8 @@ async function checkLoginStatus() {
       }
       imgEl.style.display = "block";
     } else {
-    document.getElementById('ton-connect-button').style.display = "flex"
+      tonConnectUI.disconnect()
+      document.getElementById('ton-connect-button').style.display = "flex"
     }
   } catch (err) {
     console.error('Не удалось получить статус или профиль:', err);
