@@ -52,8 +52,12 @@ public class PlayerController {
 
         Player player = playerService.getPlayerByWalletId(walletId);
 
-        log.debug(player.toString());
-        log.debug(playerChangeSettingsDto.toString());
+        if (player != null) {
+            log.debug(player.toString());
+            log.debug(playerChangeSettingsDto.toString());
+        } else {
+            log.debug("pLayer is null");
+        }
 
         if (player == null || !player.getUsername().equals(playerChangeSettingsDto.getUsername())) {
             if (playerService.isTakenUsername(playerChangeSettingsDto.getUsername())) {

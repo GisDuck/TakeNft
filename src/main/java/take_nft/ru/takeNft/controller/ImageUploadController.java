@@ -41,6 +41,8 @@ public class ImageUploadController {
         }
 
         try {
+            log.info("user:{} upload image: {}", address);
+
 
             File imgFile = convertToFile(avatarFile);
 
@@ -48,7 +50,7 @@ public class ImageUploadController {
 
             imgFile.delete();
 
-            log.info("user:{} upload image: {}", address, uploadResult.toString());
+            log.info("successful user:{} upload image: {}", address, uploadResult.toString());
 
             return ResponseEntity.ok(
                     new uploadAvatarRequest("successful", uploadResult.get("url").toString())
