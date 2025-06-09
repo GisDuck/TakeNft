@@ -17,7 +17,9 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         initializeMenu();
-        document.getElementById('header').style.display = "flex";
+        setTimeout(() => {
+            document.getElementById('header').style.display = "flex";
+        }, 500);
 
       })
       .catch(err => {
