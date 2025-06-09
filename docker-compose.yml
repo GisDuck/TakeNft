@@ -41,7 +41,7 @@ services:
 
   backend:
     image: openjdk:17
-    container_name: takenft-app
+    container_name: app
     restart: always
     volumes:
       - ./build/libs/takenft.jar:/app/takenft.jar
@@ -55,7 +55,3 @@ services:
       - rabbitmq
     ports:
       - "8080:8080"
-
-
-volumes:
-  pgdata:
