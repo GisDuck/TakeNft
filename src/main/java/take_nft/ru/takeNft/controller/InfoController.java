@@ -34,13 +34,15 @@ public class InfoController {
         String userWalletId = (String) request.getSession().getAttribute("address");
         if ( profileWalletId == null) return "forward:/";
 
+        if (profileWalletId.equals(userWalletId)) {
+            return "forward:/inventory";
+        }
+
         Player player = playerService.getPlayerByWalletId(profileWalletId);
         log.info("словили игрока с id: {}", profileWalletId);
         model.addAttribute("player", player);
 
-        if (player.getWalletId().equals(profileWalletId)) {
-            return "forward:/inventory";
-        }
+
 
 
         boolean isHideInviteBtn =
