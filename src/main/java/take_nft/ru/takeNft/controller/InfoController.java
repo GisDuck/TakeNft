@@ -35,8 +35,8 @@ public class InfoController {
 
         boolean isHideInviteBtn =
                 friendService.areFriends(userWalletId, profileWalletId)
-                && friendService.hasInvite(userWalletId, profileWalletId)
-                && friendService.hasInvite(profileWalletId, userWalletId);
+                || friendService.hasInvite(userWalletId, profileWalletId)
+                || friendService.hasInvite(profileWalletId, userWalletId);
 
         model.addAttribute("isHideInviteBtn", isHideInviteBtn);
         return "player_info";  // src/main/resources/templates/player_info.html
