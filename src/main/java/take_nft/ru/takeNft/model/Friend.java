@@ -11,7 +11,7 @@ import take_nft.ru.takeNft.repository.FriendInviteRepository;
 @Table(name = "friends")
 public class Friend {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne

@@ -8,7 +8,7 @@ import lombok.Data;
 @Table(name = "friend_invites")
 public class FriendInvites {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
