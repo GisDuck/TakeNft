@@ -24,6 +24,7 @@ public class InfoController {
         Player player = playerService.getPlayerByWalletId(walletId);
         log.info("словили игрока с id: {}", walletId);
         model.addAttribute("player", player);
+        model.addAttribute("isHideInviteBtn", )
         return "player_info";  // src/main/resources/templates/player_info.html
     }
 
