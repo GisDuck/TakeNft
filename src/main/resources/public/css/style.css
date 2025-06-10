@@ -825,6 +825,21 @@ nav a:hover {
   margin-bottom: 40px;
 }
 
+#create-duel-button {
+  background: #000;
+  color: #fff;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 20px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background .3s, color .3s;
+}
+#create-duel-button:hover {
+  background: #79C3FF;
+  color: #000;
+}
+
 
 .settings-privacy {
   margin-left: calc(120px + 24px*2 + 70px);

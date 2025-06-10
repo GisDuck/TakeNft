@@ -30,6 +30,7 @@ public class DuelRoom {
                 .stream()
                 .map(n -> new NftDto(n.getId(), n.getImgUrl(), n.getName()))
                 .toList();
+        this.type = "room";
     }
 
     public DuelRoom(PlayerIndexInfoDto owner, List<Nft> ownerNfts, PlayerIndexInfoDto opponent) {
