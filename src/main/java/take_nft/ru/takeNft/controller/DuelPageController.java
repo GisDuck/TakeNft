@@ -50,7 +50,7 @@ public class DuelPageController {
         String address = (String) session.getAttribute("address");
 
 
-
+        return "forward:/";
     }
 
 }
