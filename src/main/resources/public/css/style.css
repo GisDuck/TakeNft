@@ -54,12 +54,12 @@ header {
 #avatar-menu {
   position: absolute;
   top: 70px;
-  right: 40px;
+  right: 100px;
   background: white;
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
   border-radius: 12px;
   padding: 12px;
-  display: flex;
+  display: none;
   flex-direction: column;
   gap: 10px;
   z-index: 1002;
@@ -78,7 +78,8 @@ header {
 }
 
 #avatar-menu button:hover {
-  background: #eee;
+  background-color: rgb(20, 20, 20);
+    color: #f4f4f4;
 }
 
 #logo-img {
