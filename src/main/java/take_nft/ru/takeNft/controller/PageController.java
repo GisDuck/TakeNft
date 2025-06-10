@@ -31,19 +31,9 @@ public class PageController {
         return "index";
     }
 
-    @GetMapping("/duel-rooms")
-    public String duelRooms() {
-        return "duel-rooms";
-    }
-
     @GetMapping("/create")
     public String create() {
         return "redirect:/pages/create.html";
-    }
-
-    @GetMapping("/duel")
-    public String duel() {
-        return "duel";
     }
 
     @GetMapping("/friends")

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <link rel="icon" href="/img/logo.png" type="image/png">
   <meta charset="UTF-8">
@@ -8,7 +8,7 @@
   <link href="/css/style.css" type="text/css" rel="stylesheet">
 
   <script src="/js/initialize_header.js"></script>
-  <script src="/js/duel_rooms.js"></script>
+<script src="/js/init_data_href.js"></script>
   <script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
   <script src="https://unpkg.com/@tonconnect/sdk@latest/dist/tonconnect-sdk.min.js"></script>
 </head>
@@ -19,7 +19,61 @@
   <div id="content">
     <div class="container">
       <h1>Duels</h1>  <button  id="create-room-btn">Создать дуэль</button>
-      <div id="rooms-container"></div>
+
+      <div id="rooms-container">
+        <div id="invitation-container"
+             th:if="${invitations != null and invitations.size() > 0}"
+             >
+          <div class="subtitle">Invitation to a duel</div>
+
+          <div class="room-card duel-invite"
+               th:each="inv : ${invitations}">
+            <div class="room-header">
+              <img th:src="@{${inv.owner.avatarUrl()}}"
+                   th:attr="data-href=@{'/player'(walletId=${inv.owner.address()})}"alt="avatar">
+              <div class="info">
+                <div class="name" th:text="${inv.owner.username}">PlayerOne</div>
+                <div class="join-text">Join!</div>
+              </div>
+            </div>
+            <div class="nfts">
+              <div class="nft-card"
+                   th:each="nft : ${inv.ownerNfts}"
+                   th:attr="data-href=@{'/nft'(id=${nft.id})}">
+                <img th:src="@{${nft.imgUrl}}" alt="NFT">
+              </div>
+            </div>
+          </div>
+
+          <div id="invite-separator"></div>
+        </div>
+
+        <div id="other-rooms-container"
+             th:if="${rooms != null and rooms.size() > 0}"
+             >
+          <div class="subtitle">Room list</div>
+          <div class="room-card"
+               th:each="room : ${rooms}">
+            <div class="room-header">
+              <img th:src="@{${room.owner.avatarUrl()}}"
+                   th:attr="data-href=@{'/player'(walletId=${room.owner.address()})}"alt="avatar">
+              <div class="info">
+                <div class="name" th:text="${room.owner.username}">PlayerTwo</div>
+              </div>
+            </div>
+            <<div class="nfts">
+            <div class="nft-card"
+                 th:each="nft : ${room.ownerNfts}"
+                 th:attr="data-href=@{'/nft'(id=${nft.id})}">
+              <img th:src="@{${nft.imgUrl}}" alt="NFT">
+            </div>
+          </div>
+          </div>
+        </div>
+
+        <p th:if="${rooms == null or rooms.size() == 0}">No rooms yet...</p>
+
+      </div>
 
 
     </div>
