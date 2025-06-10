@@ -1,8 +1,8 @@
 package take_nft.ru.takeNft.dto;
 
 public record FriendDto (
-    String address,
+    String walletId,
     String username,
     String avatarUrl,
-    int ammountNft
+    int amountNft
 ) {}
