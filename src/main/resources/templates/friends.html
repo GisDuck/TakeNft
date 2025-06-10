@@ -10,6 +10,7 @@
   <script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
   <script src="https://unpkg.com/@tonconnect/sdk@latest/dist/tonconnect-sdk.min.js"></script>
   <script src="/js/init_data_href.js"></script>
+  <script src="/js/friends.js"></script>
 </head>
 <body>
 <div id="site-header"></div>
@@ -27,14 +28,8 @@
             <div class="ammount-nft">amount nft: <span th:text="${inv.amountNft}"></span></div>
           </div>
           <div class="friend-actions">
-            <form th:action="@{/api/friends/accept}" method="post" onclick="event.stopPropagation();">
-              <input type="hidden" name="walletId" th:value="${inv.walletId}" />
-              <button type="submit">Add friend</button>
-            </form>
-            <form th:action="@{/api/friends/ignore}" method="post" onclick="event.stopPropagation();">
-              <input type="hidden" name="walletId" th:value="${inv.walletId}" />
-              <button type="submit">Ignore</button>
-            </form>
+            <button data-wallet th:attr="data-wallet=${inv.walletId}" data-url="/api/friends/accept">Add friend</button>
+            <button data-wallet th:attr="data-wallet=${inv.walletId}" data-url="/api/friends/ignore">Ignore</button>
           </div>
         </div>
       </div>
@@ -48,10 +43,7 @@
             <div class="ammount-nft">amount nft: <span th:text="${fr.amountNft}"></span></div>
           </div>
           <div class="friend-actions">
-            <form th:action="@{/duel/invite}" method="post" onclick="event.stopPropagation();">
-              <input type="hidden" name="walletId" th:value="${fr.walletId}" />
-              <button type="submit">Invite in Duel</button>
-            </form>
+            <button data-wallet th:attr="data-wallet=${fr.walletId}" data-url="/duel/invite">Invite in Duel</button>
           </div>
         </div>
       </div>
@@ -60,7 +52,6 @@
         <p>You no have any friends...</p>
       </div>
     </div>
-
 
   </div>
 </div>
