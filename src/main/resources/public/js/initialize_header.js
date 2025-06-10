@@ -131,6 +131,7 @@ async function checkLoginStatus() {
     } else {
       tonConnectUI.disconnect()
       document.getElementById('ton-connect-button').style.display = "flex"
+      tonConnectUI.disconnect()
     }
   } catch (err) {
     console.error('Не удалось получить статус или профиль:', err);
@@ -148,4 +149,23 @@ btn.addEventListener('click', () => {
 navWrap.addEventListener('mouseleave', () => {
   navWrap.classList.remove('open-menu');
 });
+}
+
+
+
+document.addEventListener('click', (e) => {
+  const menu = document.getElementById('avatar-menu');
+  const avatar = document.getElementById('account-img');
+
+  if (avatar && avatar.contains(e.target)) {
+    menu.classList.toggle('disp-none');
+  } else if (!menu.contains(e.target)) {
+    menu.classList.add('disp-none');
+  }
+});
+
+function logout() {
+tonConnectUI.disconnect()
+  fetch('/api/ton-proof/logout', { method: 'POST', credentials: 'include' })
+    .then(() => window.location.href = '/');
 }
