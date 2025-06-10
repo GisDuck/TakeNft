@@ -31,12 +31,16 @@ public class InfoController {
 
     @GetMapping("/player")
     public String playerPage(@RequestParam("walletId") String profileWalletId, Model model, HttpServletRequest request) {
+        String userWalletId = (String) request.getSession().getAttribute("address");
+        if ( profileWalletId == null) return "forward:/";
+
         Player player = playerService.getPlayerByWalletId(profileWalletId);
         log.info("словили игрока с id: {}", profileWalletId);
         model.addAttribute("player", player);
 
-        String userWalletId = (String) request.getSession().getAttribute("address");
-        if ( profileWalletId == null) return "forward:/";
+        if (player.getWalletId().equals(profileWalletId)) {
+            return "forward:/inventory";
+        }
 
 
         boolean isHideInviteBtn =
