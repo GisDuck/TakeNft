@@ -45,14 +45,14 @@ databaseChangeLog:
 
         - createIndex:
             tableName: friend_invites
-            indexName: idx_friends_first
+            indexName: idx_friend_invites_from
             columns:
               - column:
                   name: from_wallet_id
 
         - createIndex:
             tableName: friend_invites
-            indexName: idx_friends_second
+            indexName: idx_friend_invites_who_is
             columns:
               - column:
                   name: who_is_invited
