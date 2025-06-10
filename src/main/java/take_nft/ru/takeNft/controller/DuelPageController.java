@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import take_nft.ru.takeNft.model.DuelRoom;
 import take_nft.ru.takeNft.model.Nft;
+import take_nft.ru.takeNft.model.Player;
 import take_nft.ru.takeNft.service.DuelRoomStorage;
 import take_nft.ru.takeNft.service.NftService;
 import take_nft.ru.takeNft.service.PlayerService;
@@ -35,6 +36,9 @@ public class DuelPageController {
         }
         String address = (String) session.getAttribute("address");
 
+        List<Nft> nfts = playerService.getPlayerByWalletId(address).getInventory();
+
+        duelRoomStorage.createRoom(address, nfts);
 
         List<DuelRoom> rooms = duelRoomStorage.getAllRooms();
         List<DuelRoom> invitations = duelRoomStorage.getInvitations(address);
