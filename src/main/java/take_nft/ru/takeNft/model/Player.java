@@ -59,6 +59,7 @@ public class Player {
             orphanRemoval = true,
             fetch = FetchType.LAZY
     )
+    @Builder.Default
     private List<Friend> friends = new ArrayList<>();
 
     @OneToMany(
@@ -67,7 +68,8 @@ public class Player {
             orphanRemoval = true,
             fetch = FetchType.LAZY
     )
-    private List<FriendInvites> friendInvite;
+    @Builder.Default
+    private List<FriendInvites> friendInvite = new ArrayList<>();
 
     public Player(String walletId, PlayerChangeSettingsDto playerChangeSettingsDto) {
         this.walletId = walletId;
