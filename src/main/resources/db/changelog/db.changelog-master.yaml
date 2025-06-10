@@ -7,6 +7,9 @@ databaseChangeLog:
       file: db/changelog/changeset/create-nfts-04.yaml
   - include:
       file: db/changelog/changeset/create-friends-06.yaml
+  - include:
+      file: db/changelog/changeset/create-friend-invites-07.yaml
+
 
 
 
