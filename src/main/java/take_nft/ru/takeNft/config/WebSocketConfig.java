@@ -8,7 +8,7 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 
 @Configuration
 @EnableWebSocketMessageBroker
-public class DuelWebSocketConfig implements WebSocketMessageBrokerConfigurer {
+public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     @Override
     public void configureMessageBroker(MessageBrokerRegistry config) {
         config.enableSimpleBroker("/topic", "/queue");
@@ -20,3 +20,4 @@ public class DuelWebSocketConfig implements WebSocketMessageBrokerConfigurer {
         registry.addEndpoint("/duel-ws").setAllowedOrigins("*").withSockJS();
     }
 }
+
