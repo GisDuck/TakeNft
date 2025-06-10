@@ -25,32 +25,6 @@ public class PlayerController {
 
     private static final Logger log = LoggerFactory.getLogger(PlayerController.class);
 
-    @PostMapping("/friend-invite")
-    public ResponseEntity<?> friendInvite(@RequestBody FriendInviteDto friendInviteDto,
-                                            BindingResult result,
-                                            HttpServletRequest request) {
-        if (result.hasErrors()) {
-            String errorMessage = result.getAllErrors().get(0).getDefaultMessage();
-            return ResponseEntity.badRequest().body(new MessageRequest(errorMessage));
-        }
-
-        String walletId = (String) request.getSession().getAttribute("address");
-        if (walletId == null) return ResponseEntity.status(401).body(new MessageRequest("Not Auth"));
-
-        if (friendInviteDto.type() == "accept") {
-            playerService.acceptFriendInvite(friendInviteDto.walletId(), walletId);
-        } else {
-            playerService.ignoreFriendInvite(friendInviteDto.walletId(), walletId);
-        }
-
-        return ResponseEntity.ok(new MessageRequest("friend invite changed"));
-    }
-
-
-
-
-
-
         @GetMapping("/me")
     public ResponseEntity<PlayerIndexInfoDto> me(HttpServletRequest request) {
         HttpSession session = request.getSession(false);

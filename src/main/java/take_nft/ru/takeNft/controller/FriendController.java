@@ -26,18 +26,18 @@ public class FriendController {
     private static final Logger log = LoggerFactory.getLogger(FriendController.class);
 
     @PostMapping("/accept")
-    public String acceptFriendInvite(@RequestParam("walletId") String fromWalletId,
+    public ResponseEntity<?> acceptFriendInvite(@RequestParam("walletId") String fromWalletId,
                                      HttpSession session) {
         String currentWallet = (String) session.getAttribute("address");
         playerService.acceptFriendInvite(fromWalletId, currentWallet);
-        return "redirect:/friends"; // или обнови через JS если нужно
+        return ResponseEntity.ok(new MessageRequest("friend accept"));
     }
 
     @PostMapping("/ignore")
-    public String ignoreFriendInvite(@RequestParam("walletId") String fromWalletId,
+    public ResponseEntity<?> ignoreFriendInvite(@RequestParam("walletId") String fromWalletId,
                                      HttpSession session) {
         String currentWallet = (String) session.getAttribute("address");
         playerService.ignoreFriendInvite(fromWalletId, currentWallet);
-        return "redirect:/friends";
+        return ResponseEntity.ok(new MessageRequest("friend ignored"));
     }
 }
