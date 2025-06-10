@@ -33,11 +33,12 @@
                 <button id="duel-button" type="submit">Propose a duel</button>
               </form>
 
-              <form th:if="${!isHideInviteBtn}"
+              <form id="friend-form"
+                    th:if="${!isHideInviteBtn}"
                     th:action="@{/api/friends/invite}" method="post"
-                    onclick="event.stopPropagation();">
+                    onclick="event.stopPropagation(); return submitFriendInvite(this);">
                 <input type="hidden" name="walletId" th:value="${player.walletId}" />
-                <button id="friend-button" type="submit">Add to friends</button>
+                <button type="submit">Add to friends</button>
               </form>
             </div>
           </div>
