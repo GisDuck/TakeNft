@@ -29,6 +29,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (response.ok) {
           friendBtn.textContent = 'Invite sent';
           friendBtn.disabled = true;
+          friendBtn.style.background = '#79C3FF';
+          friendBtn.style.color = '#000';
         }
       });
     }
