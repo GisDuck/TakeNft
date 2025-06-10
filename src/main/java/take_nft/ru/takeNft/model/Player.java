@@ -54,7 +54,7 @@ public class Player {
     private List<Nft> inventory = new ArrayList<>();
 
     @OneToMany(
-            mappedBy = "first_wallet_id",
+            mappedBy = "player",
             cascade = CascadeType.ALL,
             orphanRemoval = true,
             fetch = FetchType.LAZY
@@ -62,7 +62,7 @@ public class Player {
     private List<Player> friends = new ArrayList<>();
 
     @OneToMany(
-            mappedBy = "who_is_invited",
+            mappedBy = "toPlayer",
             cascade = CascadeType.ALL,
             orphanRemoval = true,
             fetch = FetchType.LAZY
