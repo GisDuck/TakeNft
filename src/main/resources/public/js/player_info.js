@@ -35,3 +35,6 @@ export function submitFriendInvite(button) {
     }
   });
 }
+
+window.submitDuel = submitDuel;
+window.submitFriendInvite = submitFriendInvite;
