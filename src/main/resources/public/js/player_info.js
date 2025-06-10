@@ -1,40 +1,35 @@
-export function submitDuel(button) {
-  const walletId = button.getAttribute('data-wallet');
+document.addEventListener('DOMContentLoaded', () => {
+    const duelBtn = document.getElementById('duel-button');
+    if (duelBtn) {
+      duelBtn.addEventListener('click', async (e) => {
+        e.preventDefault();
+        const walletId = duelBtn.getAttribute('data-wallet');
+        const response = await fetch('/duel/invite', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams({ walletId })
+        });
+        if (response.ok) {
+          duelBtn.textContent = 'Invite sent';
+          duelBtn.disabled = true;
+        }
+      });
+    }
 
-  fetch('/duel/invite', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
-    },
-    body: `walletId=${encodeURIComponent(walletId)}`
-  }).then(response => {
-    if (response.ok) {
-      button.textContent = 'Duel Proposed';
-      button.disabled = true;
-    } else {
-      alert('Error proposing duel');
+    const friendBtn = document.getElementById('friend-button');
+    if (friendBtn) {
+      friendBtn.addEventListener('click', async (e) => {
+        e.preventDefault();
+        const walletId = friendBtn.getAttribute('data-wallet');
+        const response = await fetch('/api/friends/invite', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: new URLSearchParams({ walletId })
+        });
+        if (response.ok) {
+          friendBtn.textContent = 'Invite sent';
+          friendBtn.disabled = true;
+        }
+      });
     }
   });
-}
-
-export function submitFriendInvite(button) {
-  const walletId = button.getAttribute('data-wallet');
-
-  fetch('/api/friends/invite', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
-    },
-    body: `walletId=${encodeURIComponent(walletId)}`
-  }).then(response => {
-    if (response.ok) {
-      button.textContent = 'Invite Sent';
-      button.disabled = true;
-    } else {
-      alert('Error sending invite');
-    }
-  });
-}
-
-window.submitDuel = submitDuel;
-window.submitFriendInvite = submitFriendInvite;
