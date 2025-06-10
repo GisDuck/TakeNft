@@ -42,6 +42,10 @@ spring:
       host: redis
       port: ${REDIS_PORT}
 
+  redis:
+    host: redis
+    port: ${REDIS_PORT}
+
   rabbitmq:
     host: rabbitmq
     port: ${RABBITMQ}
