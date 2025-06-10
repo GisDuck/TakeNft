@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Duel Room</title>
+    <link href="/css/style.css" type="text/css" rel="stylesheet">
+    <script src="/js/initialize_header.js"></script>
+    <script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
+    <script src="https://unpkg.com/@tonconnect/sdk@latest/dist/tonconnect-sdk.min.js"></script>
+</head>
+<body>
+<div id="site-header"></div>
+<div id="wrapper">
+    <div id="content">
+        <section id="player-profile">
+            <div class="profile-card">
+                <div class="profile-avatar">
+                    <img id="player-avatar" class="little-circle" src="/img/default_avatar.png">
+                </div>
+                <div class="profile-info">
+                    <h2 id="player-name">You</h2>
+                </div>
+                <div class="profile-avatar">
+                    <img id="opponent-avatar" class="little-circle" src="/img/default_avatar.png">
+                </div>
+                <div class="profile-info">
+                    <h2 id="opponent-name">Waiting...</h2>
+                </div>
+            </div>
+
+            <div id="inventory-section">
+                <h3>Your Inventory</h3>
+                <div class="inventory-grid" id="inventory"></div>
+            </div>
+
+            <div class="save-container">
+                <button id="confirm-button">OK</button>
+            </div>
+        </section>
+    </div>
+</div>
+
+<script>
+    const inventoryEl = document.getElementById('inventory');
+    const confirmButton = document.getElementById('confirm-button');
+    const selectedNFTs = new Set();
+
+    const mockInventory = [
+      { id: 1, imgUrl: '/img/nft1.png' },
+      { id: 2, imgUrl: '/img/nft2.png' },
+      { id: 3, imgUrl: '/img/nft3.png' },
+      { id: 4, imgUrl: '/img/nft4.png' },
+      { id: 5, imgUrl: '/img/nft5.png' }
+    ];
+
+    function renderInventory() {
+      inventoryEl.innerHTML = '';
+      mockInventory.forEach(nft => {
+        const card = document.createElement('div');
+        card.className = 'nft-card';
+        card.dataset.id = nft.id;
+
+        const img = document.createElement('img');
+        img.src = nft.imgUrl;
+        img.alt = 'NFT';
+
+        card.appendChild(img);
+        card.onclick = () => {
+          if (selectedNFTs.has(nft.id)) {
+            selectedNFTs.delete(nft.id);
+            card.classList.remove('selected');
+          } else {
+            selectedNFTs.add(nft.id);
+            card.classList.add('selected');
+          }
+        };
+        inventoryEl.appendChild(card);
+      });
+    }
+
+    renderInventory();
+
+    confirmButton.onclick = () => {
+      console.log('Selected NFTs:', Array.from(selectedNFTs));
+      // TODO: send via WebSocket
+    };
+</script>
+</body>
+</html>

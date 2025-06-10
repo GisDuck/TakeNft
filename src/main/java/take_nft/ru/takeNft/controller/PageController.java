@@ -41,6 +41,11 @@ public class PageController {
         return "redirect:/pages/create.html";
     }
 
+    @GetMapping("/duel")
+    public String duel() {
+        return "duel";
+    }
+
     @GetMapping("/friends")
     public String friends(Model model, HttpServletRequest request) {
         HttpSession session = request.getSession(false);
