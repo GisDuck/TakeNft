@@ -53,7 +53,7 @@
             </div>
           </div>
 
-            <div class="holder" th:if="${isNft}" th:attr="data-href=@{'/player'(walletId=${owner.walletId})"}>
+            <div class="holder" th:if="${isNft}" }>
               <span class="label">Holder:</span>
               <img id="holder-avatar" class="little-circle" th:src="${owner.avatarUrl}">
               <span id="holder" th:text="${owner.username}">—</span>
