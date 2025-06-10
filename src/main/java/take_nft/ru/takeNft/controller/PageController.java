@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import take_nft.ru.takeNft.service.FriendService;
 import take_nft.ru.takeNft.service.NftCollectionService;
 import take_nft.ru.takeNft.service.PlayerService;
 
@@ -15,6 +16,9 @@ import java.util.List;
 public class PageController {
     @Autowired
     private PlayerService playerService;
+
+    @Autowired
+    private FriendService friendService;
 
     @Autowired
     private NftCollectionService nftCollectionService;
@@ -47,11 +51,11 @@ public class PageController {
 
         model.addAttribute(
                 "invites",
-                playerService.getFriendInvitesByWalletId(address)
+                friendService.getFriendInvitesByWalletId(address)
         );
         model.addAttribute(
                 "friends",
-                playerService.getFriendsByWalletId(address)
+                friendService.getFriendsByWalletId(address)
         );
 
         return "friends";
