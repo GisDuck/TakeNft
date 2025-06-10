@@ -1,3 +1,14 @@
+const createBtn = document.getElementById("create-room-btn");
+createBtn.onclick = () => {
+  fetch("/api/duel/rooms", { method: "POST" })
+    .then(res => res.json())
+    .then(data => {
+      if (data.roomId) {
+        location.href = `/duel?roomId=${data.roomId}`;
+      }
+    });
+};
+
 const roomsContainer = document.getElementById("rooms-container");
 const invitesContainer = document.getElementById("invites-container");
 

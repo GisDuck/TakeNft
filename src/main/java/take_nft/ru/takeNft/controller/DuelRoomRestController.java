@@ -2,6 +2,7 @@ package take_nft.ru.takeNft.controller;
 
 import jakarta.servlet.http.HttpSession;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import take_nft.ru.takeNft.model.DuelRoom;
@@ -51,6 +52,18 @@ public class DuelRoomRestController {
         }
 
         return Map.of("rooms", rooms, "invites", invites);
+    }
+
+    @PostMapping("/rooms")
+    public Map<String, String> createRoom(HttpSession session) {
+        String wallet = (String) session.getAttribute("wallet_id");
+        DuelRoom existing = roomStorage.findByPlayer(wallet);
+        if (existing != null) {
+            return Map.of("roomId", existing.getRoomId());
+        }
+
+        DuelRoom newRoom = roomStorage.createRoom(wallet);
+        return Map.of("roomId", newRoom.getRoomId());
     }
 }
 

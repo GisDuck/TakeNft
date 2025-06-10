@@ -33,7 +33,7 @@ public class PageController {
 
     @GetMapping("/duel-rooms")
     public String duelRooms() {
-        return "redirect:/pages/duel-rooms.html";
+        return "duel-rooms";
     }
 
     @GetMapping("/create")
