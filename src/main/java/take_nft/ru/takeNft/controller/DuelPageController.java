@@ -8,7 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import take_nft.ru.takeNft.model.DuelRoom;
+import take_nft.ru.takeNft.model.Nft;
 import take_nft.ru.takeNft.service.DuelRoomStorage;
+import take_nft.ru.takeNft.service.NftService;
 import take_nft.ru.takeNft.service.PlayerService;
 
 import java.util.List;
@@ -20,6 +22,9 @@ public class DuelPageController {
     private DuelRoomStorage duelRoomStorage;
 
     @Autowired
+    private NftService nftService;
+
+    @Autowired
     private PlayerService playerService;
 
     @GetMapping("/duel-rooms")
@@ -29,6 +34,14 @@ public class DuelPageController {
             return "forward:/";
         }
         String address = (String) session.getAttribute("address");
+
+        List<Nft> nfts = playerService.getPlayerByWalletId("wallet_002").getInventory();
+
+        duelRoomStorage.createRoom(address, nfts);
+        duelRoomStorage.createRoom(address, nfts);
+
+        duelRoomStorage.createInvitationRoom("wallet_002", nfts, address);
+        duelRoomStorage.createInvitationRoom("wallet_002", nfts, address);
 
         List<DuelRoom> rooms = duelRoomStorage.getAllRooms();
         List<DuelRoom> invitations = duelRoomStorage.getInvitations(address);
