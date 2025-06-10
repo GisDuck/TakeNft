@@ -61,7 +61,7 @@
                 <div class="name" th:text="${room.owner.username}">PlayerTwo</div>
               </div>
             </div>
-            <<div class="nfts">
+            <div class="nfts">
             <div class="nft-card"
                  th:each="nft : ${room.ownerNfts}"
                  th:attr="data-href=@{'/nft'(id=${nft.id})}">
