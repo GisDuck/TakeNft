@@ -17,47 +17,50 @@
   <div class="container">
     <h1>Friends</h1>
 
-    <div th:if="${invites != null and invites.size() > 0}">
-      <p>Bee friends!</p>
-      <div th:each="inv : ${invites}" class="friend-card invite" th:attr="data-href=@{'/player'(walletId=${inv.walletId})}" onclick="window.location=this.getAttribute('data-href')">
-        <div class="friend-info">
-          <img th:src="@{${inv.avatarUrl}}" alt="avatar" />
-          <div class="name" th:text="${inv.username}"></div>
-          <div class="ammount-nft">amount nft: <span th:text="${inv.amountNft}"></span></div>
+    <div id="friends-container">
+      <div th:if="${invites != null and invites.size() > 0}">
+        <p>Bee friends!</p>
+        <div th:each="inv : ${invites}" class="friend-card invite" th:attr="data-href=@{'/player'(walletId=${inv.walletId})}" onclick="window.location=this.getAttribute('data-href')">
+          <div class="friend-info">
+            <img th:src="@{${inv.avatarUrl}}" alt="avatar" />
+            <div class="name" th:text="${inv.username}"></div>
+            <div class="ammount-nft">amount nft: <span th:text="${inv.amountNft}"></span></div>
+          </div>
+          <div class="friend-actions">
+            <form th:action="@{/api/friends/accept}" method="post" onclick="event.stopPropagation();">
+              <input type="hidden" name="walletId" th:value="${inv.walletId}" />
+              <button type="submit">Add friend</button>
+            </form>
+            <form th:action="@{/api/friends/ignore}" method="post" onclick="event.stopPropagation();">
+              <input type="hidden" name="walletId" th:value="${inv.walletId}" />
+              <button type="submit">Ignore</button>
+            </form>
+          </div>
         </div>
-        <div class="friend-actions">
-          <form th:action="@{/api/friends/accept}" method="post" onclick="event.stopPropagation();">
-            <input type="hidden" name="walletId" th:value="${inv.walletId}" />
-            <button type="submit">Add friend</button>
-          </form>
-          <form th:action="@{/api/friends/ignore}" method="post" onclick="event.stopPropagation();">
-            <input type="hidden" name="walletId" th:value="${inv.walletId}" />
-            <button type="submit">Ignore</button>
-          </form>
+      </div>
+
+      <div th:if="${friends != null and friends.size() > 0}">
+        <p>Your Friends</p>
+        <div th:each="fr : ${friends}" class="friend-card" th:attr="data-href=@{'/player'(walletId=${fr.walletId})}" onclick="window.location=this.getAttribute('data-href')">
+          <div class="friend-info">
+            <img th:src="@{${fr.avatarUrl}}" alt="avatar" />
+            <div class="name" th:text="${fr.username}"></div>
+            <div class="ammount-nft">amount nft: <span th:text="${fr.amountNft}"></span></div>
+          </div>
+          <div class="friend-actions">
+            <form th:action="@{/duel/invite}" method="post" onclick="event.stopPropagation();">
+              <input type="hidden" name="walletId" th:value="${fr.walletId}" />
+              <button type="submit">Invite in Duel</button>
+            </form>
+          </div>
         </div>
+      </div>
+
+      <div th:if="${friends == null or friends.size() == 0}">
+        <p>You no have any friends...</p>
       </div>
     </div>
 
-    <div th:if="${friends != null and friends.size() > 0}">
-      <p>Your Friends</p>
-      <div th:each="fr : ${friends}" class="friend-card" th:attr="data-href=@{'/player'(walletId=${fr.walletId})}" onclick="window.location=this.getAttribute('data-href')">
-        <div class="friend-info">
-          <img th:src="@{${fr.avatarUrl}}" alt="avatar" />
-          <div class="name" th:text="${fr.username}"></div>
-          <div class="ammount-nft">amount nft: <span th:text="${fr.amountNft}"></span></div>
-        </div>
-        <div class="friend-actions">
-          <form th:action="@{/duel/invite}" method="post" onclick="event.stopPropagation();">
-            <input type="hidden" name="walletId" th:value="${fr.walletId}" />
-            <button type="submit">Invite in Duel</button>
-          </form>
-        </div>
-      </div>
-    </div>
-
-    <div th:if="${friends == null or friends.size() == 0}">
-      <p>You no have any friends...</p>
-    </div>
 
   </div>
 </div>
