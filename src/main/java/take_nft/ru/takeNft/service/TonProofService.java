@@ -4,6 +4,7 @@ package take_nft.ru.takeNft.service;
 import io.github.cdimascio.dotenv.Dotenv;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.ton.tonapi.sync.Tonapi;
 import org.ton.schema.tonconnect.AccountInfoByStateInit;
@@ -28,14 +29,11 @@ public class TonProofService {
     private static Dotenv dotenv = Dotenv.load();
     private static final long MAX_PAYLOAD_AGE = Long.parseLong(dotenv.get("MAX_PAYLOAD_AGE")); // 15 минут
     private static final String BASE_URL = dotenv.get("BASE_URL");
-    private static final String TON_API_KEY = dotenv.get("TON_API_KEY");
 
     private static final Logger log = LoggerFactory.getLogger(TonProofService.class);
 
-    private final Tonapi tonapi = new Tonapi(
-            TON_API_KEY,
-            false,
-            10);
+    @Autowired
+    private TonApiService tonApiService;
 
     /**
      * Сгенерировать payload для пользователя для ton proof
@@ -63,9 +61,8 @@ public class TonProofService {
 
         log.info("isValidPayload {}", isValidPayload);
 
-        AccountInfoByStateInit accountInfo = tonapi
-                .getTonconnect()
-                .getInfoByStateInit(accountJson.walletStateInit());
+        AccountInfoByStateInit accountInfo = tonApiService
+                .getAccountInfoByState(accountJson.walletStateInit());
 
         if (!isValidPayload || //проверка, что такой payload присутствует в нашей системе
                 Math.abs(proofJson.timestamp() - createPayloadTime) > MAX_PAYLOAD_AGE ||

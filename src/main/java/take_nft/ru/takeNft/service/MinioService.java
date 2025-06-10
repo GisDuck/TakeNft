@@ -20,7 +20,27 @@ public class MinioService {
     private String bucket = "uploads";
 
     public String uploadAvatar(MultipartFile file) throws Exception {
-        String filename = UUID.randomUUID() + "-" + file.getOriginalFilename();
+        String filename = "avatar-" + UUID.randomUUID() + "-" + file.getOriginalFilename();
+
+        minioClient.putObject(PutObjectArgs.builder()
+                .bucket(bucket)
+                .object(filename)
+                .stream(file.getInputStream(), file.getSize(), -1)
+                .contentType(file.getContentType())
+                .build());
+
+        return new StringBuilder()
+                .append("https://")
+                .append(BASE_URL)
+                .append('/')
+                .append(bucket)
+                .append('/')
+                .append(filename)
+                .toString();
+    }
+
+    public String uploadNftImg(MultipartFile file) throws Exception {
+        String filename = "nft-" + UUID.randomUUID() + "-" + file.getOriginalFilename();
 
         minioClient.putObject(PutObjectArgs.builder()
                 .bucket(bucket)
