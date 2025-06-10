@@ -45,7 +45,18 @@ public class InfoController {
                 || friendService.hasInvite(profileWalletId, userWalletId);
 
         model.addAttribute("isHideInviteBtn", isHideInviteBtn);
-        return "player_info";  // src/main/resources/templates/player_info.html
+        return "player_info";
+    }
+
+    @GetMapping("/inventory")
+    public String inventoryPage(Model model, HttpServletRequest request) {
+        String userWalletId = (String) request.getSession().getAttribute("address");
+        if ( userWalletId == null) return "forward:/";
+
+        Player player = playerService.getPlayerByWalletId(userWalletId);
+        model.addAttribute("player", player);
+
+        return "inventory";
     }
 
     @GetMapping("/nft")
