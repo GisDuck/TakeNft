@@ -30,13 +30,14 @@
             <div class="profile-actions">
               <form th:action="@{/duel/invite}" method="post" onclick="event.stopPropagation();">
                 <input type="hidden" name="walletId" th:value="${player.walletId}" />
-                <button type="submit">Propose a duel</button>
+                <button id="duel-button" type="submit">Propose a duel</button>
               </form>
+
               <form th:if="${isShowInviteBtn}"
                     th:action="@{/api/friends/invite}" method="post"
                     onclick="event.stopPropagation();">
                 <input type="hidden" name="walletId" th:value="${player.walletId}" />
-                <button type="submit">Add to friends</button>
+                <button id="friend-button" type="submit">Add to friends</button>
               </form>
             </div>
           </div>
