@@ -66,4 +66,17 @@ public class DuelPageController {
         return "forward:/";
     }
 
+    @GetMapping("/create-duel")
+    public String createDuel(Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession(false);
+        if (session == null || session.getAttribute("address") == null) {
+            return "forward:/";
+        }
+        String address = (String) session.getAttribute("address");
+
+        model.addAttribute("player",  playerService.getPlayerIndexInfo(address));
+
+        return "duel";
+    }
+
 }

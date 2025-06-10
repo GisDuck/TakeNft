@@ -8,16 +8,20 @@ const selectedNFTs = new Set();
 const roomId = new URLSearchParams(window.location.search).get('roomId');
 let stompClient = null;
 let currentPlayer = null;
+let mockInventory = null;
 
-const mockInventory = [
-  { id: 1, imgUrl: '/img/nft1.png' },
-  { id: 2, imgUrl: '/img/nft2.png' },
-  { id: 3, imgUrl: '/img/nft3.png' },
-  { id: 4, imgUrl: '/img/nft4.png' },
-  { id: 5, imgUrl: '/img/nft5.png' },
-  { id: 6, imgUrl: '/img/nft6.png' },
-  { id: 7, imgUrl: '/img/nft7.png' }
-];
+fetch('/api/duel/inventory')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error(`Ошибка в получении инвентаря`);
+        }
+        // читаем тело как строку
+        return response.text();
+      })
+      .then(inventory => {
+      mockInventory = inventory
+
+    });
 
 function sendSelection() {
   if (!stompClient) return;
@@ -68,32 +72,5 @@ function updateOpponentInfo(name, avatarUrl) {
   opponentNameEl.textContent = name;
   opponentAvatarEl.src = avatarUrl;
 }
-
-function connectWebSocket() {
-  const socket = new SockJS('/duel-ws');
-  stompClient = Stomp.over(socket);
-  stompClient.connect({}, () => {
-    stompClient.subscribe(`/topic/duel/${roomId}`, message => {
-      const msg = JSON.parse(message.body);
-
-      if (msg.type === 'nft_select' && msg.player !== currentPlayer) {
-        renderOpponentSelection(msg.nfts);
-      } else if ((msg.type === 'joined' || msg.type === 'opponent_rejoined') && msg.opponent !== currentPlayer) {
-        updateOpponentInfo(msg.opponentName || 'Opponent', msg.opponentAvatar || '/img/default_avatar.png');
-      }
-    });
-  });
-}
-
-fetch('/api/ton-proof/status')
-  .then(res => res.json())
-  .then(data => {
-    if (data.loggedIn) {
-      currentPlayer = data.address;
-      connectWebSocket();
-    } else {
-      alert('Please login via wallet.');
-    }
-  });
 
 renderInventory();

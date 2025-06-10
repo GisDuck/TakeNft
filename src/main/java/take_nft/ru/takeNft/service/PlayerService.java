@@ -37,6 +37,14 @@ public class PlayerService {
         );
     }
 
+    public List<NftDto> getInventoryDto(String walletId) {
+        return getPlayerByWalletId(walletId)
+                .getInventory()
+                .stream()
+                .map(n -> new NftDto(n.getId(), n.getImgUrl(), n.getName()))
+                .toList();
+    }
+
     public SettingsPlayerRequest getSettingsPlayer(String walletId) {
         Player player = getPlayerByWalletId(walletId);
         return new SettingsPlayerRequest(
