@@ -30,13 +30,11 @@
           <h2 th:text="${player.username}">Username</h2>
           <div class="profile-actions">
             <button id="duel-button"
-                    th:attr="data-wallet=${player.walletId}"
-                    onclick="submitDuel(this)">Propose a duel</button>
+                    th:attr="data-wallet=${player.walletId}">Propose a duel</button>
 
             <button id="friend-button"
                     th:if="${!isHideInviteBtn}"
-                    th:attr="data-wallet=${player.walletId}"
-                    onclick="submitFriendInvite(this)">Add to friends</button>
+                    th:attr="data-wallet=${player.walletId}">Add to friends</button>
           </div>
         </div>
       </div>
