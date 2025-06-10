@@ -65,7 +65,6 @@ services:
     command: ["java", "-jar", "/app/takenft.jar"]
     depends_on:
       - db
-      - redis
       - rabbitmq
       - minio
     ports:
