@@ -158,10 +158,14 @@ document.addEventListener('click', (e) => {
   const avatar = document.getElementById('account-img');
 
   if (avatar && avatar.contains(e.target)) {
-    menu.classList.toggle('disp-none');
+    menu.style.display = "flex";
   } else if (!menu.contains(e.target)) {
-    menu.classList.add('disp-none');
+    menu.style.display = "none";
   }
+  menu.addEventListener('mouseleave', () => {
+    menu.style.display = "none";
+  });
+
 });
 
 function logout() {
