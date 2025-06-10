@@ -27,21 +27,21 @@ databaseChangeLog:
         - addUniqueConstraint:
             tableName: friend_invites
             columnNames: from_wallet_id, who_is_invited
-            constraintName: uq_friends_pair
+            constraintName: uq_who_invited
 
         - addForeignKeyConstraint:
             baseTableName: friend_invites
             baseColumnNames: from_wallet_id
             referencedTableName: players
             referencedColumnNames: from_wallet_id
-            constraintName: fk_friends_first
+            constraintName: fk_friends_from
 
         - addForeignKeyConstraint:
             baseTableName: friend_invites
             baseColumnNames: who_is_invited
             referencedTableName: players
             referencedColumnNames: from_wallet_id
-            constraintName: fk_friends_second
+            constraintName: fk_friends_who_is
 
         - createIndex:
             tableName: friend_invites
