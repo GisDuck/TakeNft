@@ -8,6 +8,6 @@ import java.util.List;
 
 @Repository
 public interface NftRepository extends JpaRepository<Nft, Long> {
-    public List<Nft> findByName(String name);
-    public long countByOwner(Player owner);
+    List<Nft> findByName(String name);
+    long countByOwner(Player owner);
 }

@@ -10,11 +10,11 @@ import java.util.List;
 
 @Repository
 public interface PlayerRepository extends JpaRepository<Player, String> {
-    public Player findByWalletId(String walletId);
-    public Player findByUsername(String username);
-    public boolean existsByWalletId(String walletId);
-    public boolean existsByUsername(String username);
-    public boolean existsByEmail(String email);
+    Player findByWalletId(String walletId);
+    Player findByUsername(String username);
+    boolean existsByWalletId(String walletId);
+    boolean existsByUsername(String username);
+    boolean existsByEmail(String email);
 
     @Query("""
       SELECT new take_nft.ru.takeNft.dto.TopHolderDto(

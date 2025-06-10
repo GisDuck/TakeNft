@@ -4,13 +4,12 @@ package take_nft.ru.takeNft.service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import take_nft.ru.takeNft.dto.*;
 import take_nft.ru.takeNft.model.Friend;
 import take_nft.ru.takeNft.model.Player;
-import take_nft.ru.takeNft.repository.FriendInviteRepository;
+import take_nft.ru.takeNft.repository.FriendInvitesRepository;
 import take_nft.ru.takeNft.repository.FriendRepository;
 import take_nft.ru.takeNft.repository.PlayerRepository;
 
@@ -22,7 +21,7 @@ public class FriendService {
     private PlayerRepository playerRepository;
 
     @Autowired
-    private FriendInviteRepository friendInviteRepository;
+    private FriendInvitesRepository friendInvitesRepository;
 
     @Autowired
     private FriendRepository friendRepository;
@@ -57,7 +56,7 @@ public class FriendService {
         Player to = playerRepository.findByWalletId(whoIsInvited);
 
         // Удаляем приглашение
-        friendInviteRepository.deleteByFromPlayerAndToPlayer(from, to);
+        friendInvitesRepository.deleteByFromPlayerAndToPlayer(from, to);
 
         // Добавляем двустороннюю дружбу
         friendRepository.save(new Friend(from, to));
@@ -70,6 +69,20 @@ public class FriendService {
         Player to = playerRepository.findByWalletId(whoIsInvited);
 
         // Удаляем приглашение
-        friendInviteRepository.deleteByFromPlayerAndToPlayer(from, to);
+        friendInvitesRepository.deleteByFromPlayerAndToPlayer(from, to);
+    }
+
+    public boolean areFriends(String firstWalletId, String secondWalletId) {
+        Player player = playerRepository.findByWalletId(firstWalletId);
+        Player friend = playerRepository.findByWalletId(secondWalletId);
+
+        return friendRepository.existsByPlayerAndFriend(player, friend);
+    }
+
+    public boolean hasInvite(String fromWalletId, String toWalletId) {
+        Player from = playerRepository.findByWalletId(fromWalletId);
+        Player to = playerRepository.findByWalletId(toWalletId);
+
+        return friendInvitesRepository.existsByFromPlayerAndToPlayer(from, to);
     }
 }

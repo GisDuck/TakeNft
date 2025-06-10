@@ -1,13 +1,14 @@
 package take_nft.ru.takeNft.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import take_nft.ru.takeNft.model.Player;
+import take_nft.ru.takeNft.service.FriendService;
 import take_nft.ru.takeNft.service.NftCollectionService;
 import take_nft.ru.takeNft.service.PlayerService;
 
@@ -19,12 +20,25 @@ public class InfoController {
     @Autowired
     public NftCollectionService nftCollectionService;
 
+    @Autowired
+    public FriendService friendService;
+
     @GetMapping("/player")
-    public String playerPage(@RequestParam("walletId") String walletId, Model model) {
-        Player player = playerService.getPlayerByWalletId(walletId);
-        log.info("словили игрока с id: {}", walletId);
+    public String playerPage(@RequestParam("walletId") String profileWalletId, Model model, HttpServletRequest request) {
+        Player player = playerService.getPlayerByWalletId(profileWalletId);
+        log.info("словили игрока с id: {}", profileWalletId);
         model.addAttribute("player", player);
-        model.addAttribute("isHideInviteBtn", )
+
+        String userWalletId = (String) request.getSession().getAttribute("address");
+        if ( profileWalletId == null) return "forward:/";
+
+
+        boolean isShowInviteBtn =
+                friendService.areFriends(userWalletId, profileWalletId)
+                && friendService.hasInvite(userWalletId, profileWalletId)
+                && friendService.hasInvite(profileWalletId, userWalletId);
+
+        model.addAttribute("isShowInviteBtn", isShowInviteBtn);
         return "player_info";  // src/main/resources/templates/player_info.html
     }
 

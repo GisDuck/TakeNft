@@ -10,8 +10,8 @@ import java.util.List;
 
 @Repository
 public interface NftCollectionRepository extends JpaRepository<NftCollection, Long> {
-    public NftCollection findByName(String name);
-    public NftCollection findFirstByOrderByIdDesc();
+    NftCollection findByName(String name);
+    NftCollection findFirstByOrderByIdDesc();
 
     @Query("""
       SELECT COUNT(n)
