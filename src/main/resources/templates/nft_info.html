@@ -8,6 +8,7 @@
   <link href="/css/style.css" rel="stylesheet" type="text/css" />
 
   <script src="/js/initialize_header.js"></script>
+  <script src="/js/init_data_href.js"></script>
   <script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
   <script src="https://unpkg.com/@tonconnect/sdk@latest/dist/tonconnect-sdk.min.js"></script>
 </head>
@@ -53,7 +54,7 @@
             </div>
           </div>
 
-            <div class="holder" th:if="${isNft}" }>
+            <div class="holder" th:if="${isNft}" th:attr="data-href=@{'/player'(walletId=${owner.walletId})}">
               <span class="label">Holder:</span>
               <img id="holder-avatar" class="little-circle" th:src="${owner.avatarUrl}">
               <span id="holder" th:text="${owner.username}">—</span>
