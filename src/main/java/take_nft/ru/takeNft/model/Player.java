@@ -59,7 +59,7 @@ public class Player {
             orphanRemoval = true,
             fetch = FetchType.LAZY
     )
-    private List<Player> friends = new ArrayList<>();
+    private List<Friend> friends = new ArrayList<>();
 
     @OneToMany(
             mappedBy = "toPlayer",
@@ -67,7 +67,7 @@ public class Player {
             orphanRemoval = true,
             fetch = FetchType.LAZY
     )
-    private List<Player> friendInvite;
+    private List<FriendInvites> friendInvite;
 
     public Player(String walletId, PlayerChangeSettingsDto playerChangeSettingsDto) {
         this.walletId = walletId;

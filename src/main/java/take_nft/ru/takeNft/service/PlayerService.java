@@ -84,6 +84,7 @@ public class PlayerService {
 
         return player.getFriendInvite()
                 .stream()
+                .map(p -> p.getFromPlayer())
                 .map(p -> new FriendDto(p.getWalletId(), p.getUsername(), p.getAvatarUrl(), p.getInventory().size()))
                 .toList();
     }
@@ -94,6 +95,7 @@ public class PlayerService {
 
         return player.getFriends()
                 .stream()
+                .map(p -> p.getFriend())
                 .map(p -> new FriendDto(p.getWalletId(), p.getUsername(), p.getAvatarUrl(), p.getInventory().size()))
                 .toList();
     }
