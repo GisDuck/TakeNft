@@ -3,6 +3,7 @@
   flex-direction: column;
   gap: 16px;
   margin-top: 20px;
+  background: #F2F2F2;
 }
 
 #friends-container p {
