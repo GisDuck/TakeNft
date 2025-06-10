@@ -3,6 +3,7 @@ package take_nft.ru.takeNft.service;
 import org.springframework.stereotype.Service;
 import take_nft.ru.takeNft.model.DuelRoom;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
@@ -35,9 +36,19 @@ public class DuelRoomStorage {
     }
 
     public DuelRoom findByPlayer(String player) {
-        return rooms.values().stream()
+        return rooms
+                .values()
+                .stream()
                 .filter(r -> r.getOwner().equals(player) || player.equals(r.getOpponent()))
                 .findFirst()
                 .orElse(null);
     }
+
+    public List<DuelRoom> getAllRooms() {
+        return rooms
+                .values()
+                .stream()
+                .toList();
+    }
+
 }
