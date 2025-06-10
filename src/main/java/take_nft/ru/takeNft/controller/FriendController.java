@@ -9,7 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import take_nft.ru.takeNft.dto.*;
 import take_nft.ru.takeNft.service.FriendService;
-import take_nft.ru.takeNft.service.PlayerService;
 
 @RestController
 @RequestMapping("/api/friends")
@@ -20,18 +19,27 @@ public class FriendController {
     private static final Logger log = LoggerFactory.getLogger(FriendController.class);
 
     @PostMapping("/accept")
-    public ResponseEntity<?> acceptFriendInvite(@RequestParam("walletId") String fromWalletId,
-                                     HttpSession session) {
+    public ResponseEntity<?> accept(@RequestParam("walletId") String fromWalletId,
+                                    HttpSession session) {
         String currentWallet = (String) session.getAttribute("address");
         friendService.acceptFriendInvite(fromWalletId, currentWallet);
         return ResponseEntity.ok(new MessageRequest("friend accept"));
     }
 
     @PostMapping("/ignore")
-    public ResponseEntity<?> ignoreFriendInvite(@RequestParam("walletId") String fromWalletId,
+    public ResponseEntity<?> ignore(@RequestParam("walletId") String fromWalletId,
                                      HttpSession session) {
         String currentWallet = (String) session.getAttribute("address");
         friendService.ignoreFriendInvite(fromWalletId, currentWallet);
+        return ResponseEntity.ok(new MessageRequest("friend ignored"));
+    }
+
+    @PostMapping("/invite")
+    public ResponseEntity<?> invite(@RequestParam("walletId") String toWalletId,
+                                    HttpSession session) {
+        String currentWallet = (String) session.getAttribute("address");
+
+        friendService.inviteFriend(currentWallet, toWalletId);
         return ResponseEntity.ok(new MessageRequest("friend ignored"));
     }
 }

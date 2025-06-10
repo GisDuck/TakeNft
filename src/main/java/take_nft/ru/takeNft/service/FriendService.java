@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import take_nft.ru.takeNft.dto.*;
 import take_nft.ru.takeNft.model.Friend;
+import take_nft.ru.takeNft.model.FriendInvites;
 import take_nft.ru.takeNft.model.Player;
 import take_nft.ru.takeNft.repository.FriendInvitesRepository;
 import take_nft.ru.takeNft.repository.FriendRepository;
@@ -48,6 +49,13 @@ public class FriendService {
                 .map(p -> p.getFriend())
                 .map(p -> new FriendDto(p.getWalletId(), p.getUsername(), p.getAvatarUrl(), p.getInventory().size()))
                 .toList();
+    }
+
+    public void inviteFriend(String fromWalletId, String toWalletId) {
+        Player from = playerRepository.findByWalletId(fromWalletId);
+        Player to = playerRepository.findByWalletId(toWalletId);
+
+        friendInvitesRepository.save(new FriendInvites(from, to));
     }
 
     @Transactional

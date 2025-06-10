@@ -22,4 +22,9 @@ public class FriendInvites {
     @ManyToOne
     @JoinColumn(name = "who_is_invited")
     private Player toPlayer;
+
+    public FriendInvites (Player from, Player to) {
+        this.fromPlayer = from;
+        this.toPlayer = to;
+    }
 }
