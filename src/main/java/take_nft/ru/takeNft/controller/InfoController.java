@@ -7,9 +7,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import take_nft.ru.takeNft.model.Nft;
+import take_nft.ru.takeNft.model.NftCollection;
 import take_nft.ru.takeNft.model.Player;
 import take_nft.ru.takeNft.service.FriendService;
 import take_nft.ru.takeNft.service.NftCollectionService;
+import take_nft.ru.takeNft.service.NftService;
 import take_nft.ru.takeNft.service.PlayerService;
 
 @Slf4j
@@ -19,6 +22,9 @@ public class InfoController {
     public PlayerService playerService;
     @Autowired
     public NftCollectionService nftCollectionService;
+
+    @Autowired
+    public NftService nftService;
 
     @Autowired
     public FriendService friendService;
@@ -43,16 +49,20 @@ public class InfoController {
     }
 
     @GetMapping("/nft")
-    public String nft(@RequestParam("id") String id, Model model) {
+    public String nft(@RequestParam("id") Long id, Model model) {
         log.info("словили nft с id: {}", id);
-        model.addAttribute("nftId", id);
-        return "forward:/pages/index.html";
+        Nft nft = nftService.getNftById(id);
+        model.addAttribute("nft", nft);
+        model.addAttribute("type", "nft");
+        return "nft_info";
     }
 
     @GetMapping("/collection")
-    public String collection(@RequestParam("id") String id, Model model) {
+    public String collection(@RequestParam("id") Long id, Model model) {
         log.info("словили collection с id: {}", id);
-        model.addAttribute("collectionId", id);
-        return "forward:/pages/index.html";
+        NftCollection collection = nftCollectionService.getCollectionById(id);
+        model.addAttribute("nft", collection);
+        model.addAttribute("isNft", true);
+        return "nft_info";
     }
 }

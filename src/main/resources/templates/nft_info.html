@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
   <link rel="icon" href="/img/logo.png" type="image/png">
   <meta charset="UTF-8" />
@@ -22,11 +22,11 @@
         <div class="detail-container">
 
           <div class="detail-image">
-            <img id="nft-image" src="" alt="NFT image">
+            <img id="nft-image" th:src="${nft.imgUrl}" alt="NFT image">
           </div>
 
           <div class="detail-info">
-            <h1 id="nft-title">Loading...</h1>
+            <h1 id="nft-title" th:text="${nft.name}">Loading...</h1>
 
             <button class="btn-see-more" id="btn-see-more">
               See More from <span id="collection-name">—</span>
@@ -50,14 +50,14 @@
 
             <div class="description">
               <h3>Description</h3>
-              <p id="description">Loading...</p>
+              <p id="description" th:text="${nft.description}">Loading...</p>
             </div>
           </div>
 
-            <div class="holder">
+            <div class="holder" th:if="${isNft}" th:attr="data-href=@{'/player'(walletId=${nft.owner.walletId})"}>
               <span class="label">Holder:</span>
-              <img id="holder-avatar" class="little-circle">
-              <span id="holder">—</span>
+              <img id="holder-avatar" class="little-circle" th:src="${nft.owner.avatarUrl}">
+              <span id="holder" th:text="${nft.owner.name}">—</span>
             </div>
           </div>
         </div>

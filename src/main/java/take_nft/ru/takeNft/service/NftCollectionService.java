@@ -33,4 +33,9 @@ public class NftCollectionService {
         // Получить первую страницу (0) размером 5
         return nftCollectionRepository.findBestCollections(PageRequest.of(0, 5));
     }
+
+    public NftCollection getCollectionById(Long id) {
+        return nftCollectionRepository.getById(id);
+    }
+
 }
