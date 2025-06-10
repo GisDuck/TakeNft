@@ -37,8 +37,6 @@ public class DuelPageController {
         List<Nft> nfts = playerService.getPlayerByWalletId(address).getInventory();
 
         duelRoomStorage.createRoom(address, nfts);
-        duelRoomStorage.createRoom(address, nfts);
-        duelRoomStorage.createInvitationRoom(address, nfts, address);
         duelRoomStorage.createInvitationRoom(address, nfts, address);
 
         List<DuelRoom> rooms = duelRoomStorage.getOpenRooms();
