@@ -33,14 +33,14 @@ databaseChangeLog:
             baseTableName: friend_invites
             baseColumnNames: from_wallet_id
             referencedTableName: players
-            referencedColumnNames: from_wallet_id
+            referencedColumnNames: wallet_id
             constraintName: fk_friends_from
 
         - addForeignKeyConstraint:
             baseTableName: friend_invites
             baseColumnNames: who_is_invited
             referencedTableName: players
-            referencedColumnNames: from_wallet_id
+            referencedColumnNames: wallet_id
             constraintName: fk_friends_who_is
 
         - createIndex:
