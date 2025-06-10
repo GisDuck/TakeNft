@@ -51,4 +51,11 @@ public class DuelRoomStorage {
                 .toList();
     }
 
+    public void removeEmptyRooms() {
+        rooms.entrySet().removeIf(entry -> {
+            DuelRoom room = entry.getValue();
+            return room.getOpponent() == null && room.getOwner() == null;
+        });
+    }
+
 }
