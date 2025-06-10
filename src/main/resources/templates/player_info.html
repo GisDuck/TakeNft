@@ -8,6 +8,7 @@
   <link href="/css/style.css" rel="stylesheet" type="text/css" />
 
   <script src="/js/initialize_header.js"></script>
+  <script src="/js/player_info.js"></script>
   <script src="https://unpkg.com/@tonconnect/ui@latest/dist/tonconnect-ui.min.js"></script>
   <script src="https://unpkg.com/@tonconnect/sdk@latest/dist/tonconnect-sdk.min.js"></script>
   <script type="module" src="/js/init_data_href.js"></script>
@@ -38,7 +39,7 @@
                     th:action="@{/api/friends/invite}" method="post"
                     onclick="event.stopPropagation(); return submitFriendInvite(this);">
                 <input type="hidden" name="walletId" th:value="${player.walletId}" />
-                <button type="submit">Add to friends</button>
+                <button id="friend-button" type="submit">Add to friends</button>
               </form>
             </div>
           </div>
