@@ -3,10 +3,12 @@ package take_nft.ru.takeNft.model;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import take_nft.ru.takeNft.repository.FriendInviteRepository;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "friends")
 public class Friend {
