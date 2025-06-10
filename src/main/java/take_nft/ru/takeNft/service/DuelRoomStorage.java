@@ -69,10 +69,11 @@ public class DuelRoomStorage {
                 .toList();
     }
 
-    public List<DuelRoom> getAllRooms() {
+    public List<DuelRoom> getOpenRooms() {
         return rooms
                 .values()
                 .stream()
+                .filter(r -> r.getType().equals("room"))
                 .toList();
     }
 

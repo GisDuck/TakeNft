@@ -6,10 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import take_nft.ru.takeNft.model.DuelRoom;
 import take_nft.ru.takeNft.model.Nft;
-import take_nft.ru.takeNft.model.Player;
 import take_nft.ru.takeNft.service.DuelRoomStorage;
 import take_nft.ru.takeNft.service.NftService;
 import take_nft.ru.takeNft.service.PlayerService;
@@ -43,7 +41,7 @@ public class DuelPageController {
         duelRoomStorage.createInvitationRoom(address, nfts, address);
         duelRoomStorage.createInvitationRoom(address, nfts, address);
 
-        List<DuelRoom> rooms = duelRoomStorage.getAllRooms();
+        List<DuelRoom> rooms = duelRoomStorage.getOpenRooms();
         List<DuelRoom> invitations = duelRoomStorage.getInvitations(address);
 
         model.addAttribute("invitations", invitations);

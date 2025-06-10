@@ -26,7 +26,7 @@ public class DuelController {
     }
 
     @GetMapping("/inventory")
-    public ResponseEntity<?> status(HttpServletRequest request) {
+    public ResponseEntity<?> inventory(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         String address = (String) session.getAttribute("address");
         return ResponseEntity.ok(playerService.getInventoryDto(address));

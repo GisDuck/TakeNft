@@ -15,19 +15,15 @@ fetch('/api/duel/inventory')
         if (!response.ok) {
           throw new Error(`Ошибка в получении инвентаря`);
         }
-        // читаем тело как строку
-        return response.text();
+        console.log(response)
+        return response;
       })
       .then(inventory => {
       mockInventory = inventory
+      renderInventory();
 
     });
 
-function sendSelection() {
-  if (!stompClient) return;
-  const nfts = mockInventory.filter(nft => selectedNFTs.has(nft.id));
-  stompClient.send(`/app/duel/${roomId}/select-nft`, {}, JSON.stringify({ nfts }));
-}
 
 function renderInventory() {
   inventoryEl.innerHTML = '';
@@ -72,5 +68,3 @@ function updateOpponentInfo(name, avatarUrl) {
   opponentNameEl.textContent = name;
   opponentAvatarEl.src = avatarUrl;
 }
-
-renderInventory();
