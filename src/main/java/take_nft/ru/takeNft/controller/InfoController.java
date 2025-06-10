@@ -53,6 +53,7 @@ public class InfoController {
         log.info("словили nft с id: {}", id);
         Nft nft = nftService.getNftById(id);
         model.addAttribute("nft", nft);
+        model.addAttribute("owner", nft.getOwner());
         model.addAttribute("isNft", true);
         return "nft_info";
     }

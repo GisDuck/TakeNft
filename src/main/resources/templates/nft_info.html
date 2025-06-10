@@ -53,10 +53,10 @@
             </div>
           </div>
 
-            <div class="holder" th:if="${isNft}" th:attr="data-href=@{'/player'(walletId=${nft.owner.walletId})"}>
+            <div class="holder" th:if="${isNft}" th:attr="data-href=@{'/player'(walletId=${owner.walletId})"}>
               <span class="label">Holder:</span>
-              <img id="holder-avatar" class="little-circle" th:src="${nft.owner.avatarUrl}">
-              <span id="holder" th:text="${nft.owner.name}">—</span>
+              <img id="holder-avatar" class="little-circle" th:src="${owner.avatarUrl}">
+              <span id="holder" th:text="${owner.name}">—</span>
             </div>
           </div>
         </div>
