@@ -33,12 +33,12 @@ public class InfoController {
         if ( profileWalletId == null) return "forward:/";
 
 
-        boolean isShowInviteBtn =
+        boolean isHideInviteBtn =
                 friendService.areFriends(userWalletId, profileWalletId)
                 && friendService.hasInvite(userWalletId, profileWalletId)
                 && friendService.hasInvite(profileWalletId, userWalletId);
 
-        model.addAttribute("isShowInviteBtn", isShowInviteBtn);
+        model.addAttribute("isHideInviteBtn", isHideInviteBtn);
         return "player_info";  // src/main/resources/templates/player_info.html
     }
 
