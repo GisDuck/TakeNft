@@ -53,7 +53,7 @@ public class InfoController {
         log.info("словили nft с id: {}", id);
         Nft nft = nftService.getNftById(id);
         model.addAttribute("nft", nft);
-        model.addAttribute("type", "nft");
+        model.addAttribute("isNft", true);
         return "nft_info";
     }
 
@@ -62,7 +62,7 @@ public class InfoController {
         log.info("словили collection с id: {}", id);
         NftCollection collection = nftCollectionService.getCollectionById(id);
         model.addAttribute("nft", collection);
-        model.addAttribute("isNft", true);
+        model.addAttribute("isNft", false);
         return "nft_info";
     }
 }
