@@ -42,7 +42,9 @@ public class InfoController {
         log.info("словили игрока с id: {}", profileWalletId);
         model.addAttribute("player", player);
 
-
+        if (userWalletId == null) {
+            return "player_info_no_btn";
+        }
 
 
         boolean isHideInviteBtn =
@@ -51,7 +53,7 @@ public class InfoController {
                 || friendService.hasInvite(profileWalletId, userWalletId);
 
         model.addAttribute("isHideInviteBtn", isHideInviteBtn);
-        return "player_info";
+        return "player_info_btn";
     }
 
     @GetMapping("/inventory")
@@ -62,7 +64,7 @@ public class InfoController {
         Player player = playerService.getPlayerByWalletId(userWalletId);
         model.addAttribute("player", player);
 
-        return "inventory";
+        return "player_info_no_btn";
     }
 
     @GetMapping("/nft")
